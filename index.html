@@ -9,317 +9,713 @@
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{width:100%;height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
     #map{width:100%;height:100%;background:#e8d9b8}
-    .leaflet-container{background:#e8d9b8 !important}
+    .leaflet-container{background:#d8c8a8 !important}
 
     #topbar{position:absolute;top:10px;left:10px;right:10px;z-index:1000;display:flex;gap:10px;flex-wrap:wrap;align-items:center;pointer-events:none}
-    #topbar > *{pointer-events:auto}
+    #topbar>*{pointer-events:auto}
     .panel{background:rgba(245,235,210,0.96);border:1px solid #3a2a15;border-radius:6px;padding:8px 12px;box-shadow:0 1px 3px rgba(0,0,0,0.15)}
     #title-panel{font-family:Georgia,serif;font-style:italic;color:#3a2a15;font-size:13px;font-weight:500}
-    #search-box{flex:1;min-width:160px;max-width:240px;position:relative}
-    #search-input{width:100%;background:transparent;border:none;outline:none;color:#1a1208;font-size:13px;font-family:inherit;padding:4px}
+    #search-box{flex:1;min-width:140px;max-width:220px;position:relative}
+    #search-input{width:100%;background:transparent;border:none;outline:none;color:#1a1208;font-size:13px;padding:2px 4px}
     #search-input::placeholder{color:#8a7050}
     #search-results{position:absolute;top:36px;left:0;right:0;background:#f5ebd2;border:1px solid #3a2a15;border-radius:6px;max-height:200px;overflow-y:auto;display:none;z-index:1001}
     .search-item{padding:6px 12px;cursor:pointer;font-size:12px;color:#1a1208;border-bottom:0.5px solid #c4aa7a}
     .search-item:hover{background:#e8d9b8}
-    .search-item .year{color:#8a7050;font-size:10px;margin-left:6px}
+    .search-item .yr{color:#8a7050;font-size:10px;margin-left:6px}
 
-    #timeline-panel{position:absolute;bottom:10px;left:10px;right:10px;z-index:1000;background:rgba(245,235,210,0.97);border:1px solid #3a2a15;border-radius:6px;padding:10px 16px;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
-    #year-row{display:flex;align-items:center;gap:14px;margin-bottom:6px}
-    #year-display{font-family:Georgia,serif;font-size:20px;font-weight:600;color:#1a1208;min-width:80px;font-style:italic}
-    #year-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;background:#c4aa7a;border-radius:3px;outline:none}
-    #year-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:#5a1a1a;border-radius:50%;cursor:pointer;border:2px solid #f5ebd2}
-    #year-slider::-moz-range-thumb{width:16px;height:16px;background:#5a1a1a;border-radius:50%;cursor:pointer;border:2px solid #f5ebd2}
-    #play-btn{background:#5a1a1a;color:#f5ebd2;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px;font-family:inherit}
-    #play-btn:hover{background:#7a2a2a}
-    #timeline-events{display:flex;gap:8px;font-size:10px;color:#5a3a15;flex-wrap:wrap;font-style:italic;font-family:Georgia,serif}
-    .tl-event{padding:2px 6px;background:rgba(196,170,122,0.4);border-radius:3px;cursor:pointer;white-space:nowrap}
-    .tl-event:hover{background:rgba(196,170,122,0.7)}
+    #timeline{position:absolute;bottom:10px;left:10px;right:10px;z-index:1000;background:rgba(245,235,210,0.97);border:1px solid #3a2a15;border-radius:6px;padding:10px 16px;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+    #yr-row{display:flex;align-items:center;gap:12px;margin-bottom:4px}
+    #yr-display{font-family:Georgia,serif;font-size:20px;font-weight:600;color:#1a1208;min-width:55px;font-style:italic}
+    #yr-slider{flex:1;-webkit-appearance:none;appearance:none;height:6px;background:#c4aa7a;border-radius:3px;outline:none}
+    #yr-slider::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:#5a1a1a;border-radius:50%;cursor:pointer;border:2px solid #f5ebd2}
+    #yr-slider::-moz-range-thumb{width:16px;height:16px;background:#5a1a1a;border-radius:50%;cursor:pointer;border:2px solid #f5ebd2}
+    #play-btn{background:#5a1a1a;color:#f5ebd2;border:none;border-radius:4px;padding:4px 10px;cursor:pointer;font-size:12px}
+    #tl-events{display:flex;gap:6px;font-size:10px;color:#5a3a15;flex-wrap:wrap;font-style:italic;font-family:Georgia,serif}
+    .tl-ev{padding:2px 6px;background:rgba(196,170,122,0.4);border-radius:3px;cursor:pointer;white-space:nowrap}
+    .tl-ev:hover{background:rgba(196,170,122,0.7)}
 
-    #info-panel{position:absolute;top:60px;right:10px;width:300px;max-width:calc(100% - 20px);max-height:calc(100% - 180px);overflow-y:auto;z-index:1000;background:rgba(245,235,210,0.97);border:1px solid #3a2a15;border-radius:6px;padding:14px 16px;display:none;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
-    #info-panel h3{font-family:Georgia,serif;color:#1a1208;font-size:16px;font-weight:600;margin-bottom:3px;font-style:italic}
+    #info{position:absolute;top:60px;right:10px;width:310px;max-width:calc(100% - 20px);max-height:calc(100% - 180px);overflow-y:auto;z-index:1000;background:rgba(245,235,210,0.97);border:1px solid #3a2a15;border-radius:6px;padding:14px 16px;display:none;box-shadow:0 2px 6px rgba(0,0,0,0.2)}
+    #info h3{font-family:Georgia,serif;color:#1a1208;font-size:16px;font-weight:600;margin-bottom:2px;font-style:italic}
     #info-period{color:#6b5535;font-size:11px;margin-bottom:8px;font-style:italic;font-family:Georgia,serif}
-    #info-panel p{color:#3a2a15;font-size:12px;line-height:1.5;margin-bottom:8px}
-    #info-meta{border-top:0.5px solid #6b5535;padding-top:8px;margin-top:8px}
+    #info p,#info-desc{color:#3a2a15;font-size:12px;line-height:1.5;margin-bottom:8px}
+    #info-meta{border-top:0.5px solid #6b5535;padding-top:8px;margin-top:4px}
     .meta-row{display:flex;font-size:11px;margin-bottom:3px;color:#3a2a15}
-    .meta-label{color:#6b5535;min-width:90px;font-style:italic;font-family:Georgia,serif}
-    #info-close{position:absolute;top:10px;right:12px;color:#6b5535;cursor:pointer;font-size:16px;line-height:1;background:none;border:none}
+    .meta-label{color:#6b5535;min-width:85px;font-style:italic;font-family:Georgia,serif}
+    #info-close{position:absolute;top:8px;right:10px;color:#6b5535;cursor:pointer;font-size:16px;background:none;border:none}
+    #info-ratings{border-top:0.5px solid #6b5535;padding-top:8px;margin-top:8px}
+    .rating-row{display:flex;align-items:center;font-size:11px;margin-bottom:4px;color:#3a2a15}
+    .rating-label{min-width:85px;font-style:italic;font-family:Georgia,serif;color:#6b5535}
+    .stars{color:#c8960a;letter-spacing:1px;font-size:13px}
+    .star-empty{color:#c4aa7a}
 
-    #legend{position:absolute;top:60px;left:10px;background:rgba(245,235,210,0.92);border:1px solid #3a2a15;border-radius:6px;padding:8px 10px;max-width:140px;z-index:1000;max-height:calc(100% - 180px);overflow-y:auto;font-family:Georgia,serif}
-    #legend-title{color:#1a1208;font-size:11px;margin-bottom:5px;font-weight:600;font-style:italic}
-    .legend-item{display:flex;align-items:center;gap:5px;margin-bottom:2px;cursor:pointer}
-    .legend-item:hover{background:rgba(196,170,122,0.3)}
-    .legend-color{width:10px;height:10px;border-radius:1px;flex-shrink:0;border:0.5px solid #1a1208}
-    .legend-label{color:#3a2a15;font-size:9px;font-style:italic}
-
-    .empire-label{font-family:Georgia,serif;font-style:italic;color:#1a1208;font-weight:600;text-shadow:0 0 3px #f5ebd2,0 0 3px #f5ebd2,0 0 3px #f5ebd2;text-align:center;pointer-events:none;letter-spacing:0.3px}
+    .empire-label{font-family:Georgia,serif;font-style:italic;color:#1a1208;font-weight:600;text-shadow:0 0 3px #f5ebd2,0 0 3px #f5ebd2,0 0 3px #f5ebd2;text-align:center;pointer-events:none}
     .event-marker{background:#5a1a1a;border:2px solid #f5ebd2;border-radius:50%;width:10px !important;height:10px !important;margin-left:-5px !important;margin-top:-5px !important;cursor:pointer;box-shadow:0 0 0 1px #1a1208}
-    .capital-marker{background:#a02020;border:1.5px solid #f5ebd2;border-radius:50%;width:8px !important;height:8px !important;margin-left:-4px !important;margin-top:-4px !important}
-
-    .leaflet-popup-content-wrapper{background:#f5ebd2 !important;border:1px solid #3a2a15;border-radius:6px !important;box-shadow:0 2px 6px rgba(0,0,0,0.2) !important}
-    .leaflet-popup-tip{background:#f5ebd2 !important;border:1px solid #3a2a15}
-    .leaflet-popup-content{margin:10px 14px !important;color:#1a1208 !important;font-size:12px !important;line-height:1.5}
-    .leaflet-popup-content strong{font-family:Georgia,serif;font-style:italic}
+    .capital-marker{background:#a02020;border:1.5px solid #f5ebd2;border-radius:50%;width:7px !important;height:7px !important;margin-left:-3.5px !important;margin-top:-3.5px !important}
+    .leaflet-popup-content-wrapper{background:#f5ebd2 !important;border:1px solid #3a2a15;border-radius:6px !important}
+    .leaflet-popup-tip{background:#f5ebd2 !important}
     .leaflet-control-zoom a{background:#f5ebd2 !important;color:#1a1208 !important;border:1px solid #3a2a15 !important}
-    .leaflet-control-zoom a:hover{background:#e8d9b8 !important}
-    .leaflet-control-attribution{background:rgba(245,235,210,0.8) !important;color:#5a3a15 !important;font-size:9px !important}
-
-    #help-tip{position:absolute;bottom:90px;right:10px;background:rgba(58,42,21,0.9);color:#f5ebd2;font-size:10px;padding:4px 8px;border-radius:4px;z-index:1000;font-style:italic;font-family:Georgia,serif}
+    .leaflet-control-attribution{background:rgba(245,235,210,0.8) !important;font-size:9px !important}
   </style>
 </head>
 <body>
-
 <div id="map"></div>
-
 <div id="topbar">
-  <div class="panel" id="title-panel">📜 Historischer Atlas der Welt · 1500–2025</div>
+  <div class="panel" id="title-panel">📜 Historischer Atlas · 1500–2025</div>
   <div class="panel" id="search-box">
     <input id="search-input" type="text" placeholder="🔍 Land, Reich, Hauptstadt..."/>
     <div id="search-results"></div>
   </div>
 </div>
-
-<div id="legend"><div id="legend-title">Reiche & Länder</div><div id="legend-items"></div></div>
-
-<div id="info-panel">
+<div id="info">
   <button id="info-close">✕</button>
   <h3 id="info-name"></h3>
   <div id="info-period"></div>
   <p id="info-desc"></p>
   <div id="info-meta"></div>
+  <div id="info-ratings"></div>
 </div>
-
-<div id="help-tip">💡 Zoomen: Mausrad · Verschieben: Ziehen · Details: Klick auf Reich</div>
-
-<div id="timeline-panel">
-  <div id="year-row">
-    <button id="play-btn">▶ Auto</button>
-    <input id="year-slider" type="range" min="1500" max="2025" value="2025" step="5"/>
-    <div id="year-display">2025</div>
+<div id="timeline">
+  <div id="yr-row">
+    <button id="play-btn">▶</button>
+    <input id="yr-slider" type="range" min="1500" max="2025" value="2025" step="5"/>
+    <div id="yr-display">2025</div>
   </div>
-  <div id="timeline-events"></div>
+  <div id="tl-events"></div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 (function(){
 
-const EMPIRES = [
-  {id:"ottoman1500",name:"Osmanisches Reich",from:1500,to:1700,color:"#c0392b",poly:[[42,16],[46,21],[48,28],[47,40],[42,46],[37,48],[31,45],[28,38],[26,32],[28,25],[31,20],[36,17],[40,15]],cap:[41.0,28.95],capName:"Konstantinopel",desc:"Das Osmanische Reich war eine der mächtigsten islamischen Dynastien. Auf seinem Höhepunkt unter Sultan Süleiman dem Prächtigen erstreckte es sich über drei Kontinente.",ruler:"Sultan Süleiman I.",religion:"Islam (Sunnitisch)",pop:"~30 Mio.",lang:"Osmanisch-Türkisch"},
-  {id:"ottoman1700",name:"Osmanisches Reich",from:1700,to:1830,color:"#c0392b",poly:[[42,18],[45,22],[46,30],[44,40],[40,44],[35,46],[31,43],[28,38],[27,32],[30,22],[36,18]],cap:[41.0,28.95],capName:"Konstantinopel",desc:"Im 18. Jh. begann der langsame Niedergang nach der gescheiterten Belagerung Wiens 1683.",ruler:"Sultan Mahmud I.",religion:"Islam",pop:"~25 Mio.",lang:"Osmanisch-Türkisch"},
-  {id:"holyroman",name:"Heiliges Römisches Reich",from:1500,to:1806,color:"#9b8bc4",poly:[[55,8],[54,15],[51,18],[48,17],[46,14],[45,9],[47,5],[51,4],[54,5]],cap:[48.21,16.37],capName:"Wien",desc:"Das Heilige Römische Reich Deutscher Nation unter Habsburger Führung.",ruler:"Karl V.",religion:"Katholisch & Protestantisch",pop:"~20 Mio.",lang:"Deutsch"},
-  {id:"spain1500",name:"Spanien",from:1500,to:1700,color:"#d49560",poly:[[44,-9],[43,-2],[42,3],[39,3],[36,-2],[36,-7],[39,-9],[43,-9]],cap:[40.42,-3.7],capName:"Madrid",desc:"Spanien unter den Katholischen Königen. Begann nach Kolumbus' Reisen die Eroberung Amerikas.",ruler:"Karl V. / Philipp II.",religion:"Katholisch",pop:"~7 Mio.",lang:"Spanisch"},
-  {id:"portugal",name:"Portugal",from:1500,to:2025,color:"#5a8a4a",poly:[[42,-9],[41,-7],[37,-7],[37,-9],[42,-9]],cap:[38.72,-9.14],capName:"Lissabon",desc:"Portugal war im 15.-16. Jh. die führende Seemacht der Welt.",ruler:"König Manuel I.",religion:"Katholisch",pop:"~1,5 Mio.",lang:"Portugiesisch"},
-  {id:"france_kingdom",name:"Königreich Frankreich",from:1500,to:1792,color:"#5870a8",poly:[[51,2],[50,7],[48,8],[46,7],[44,5],[43,3],[43,-1],[46,-2],[49,-1],[51,2]],cap:[48.86,2.35],capName:"Paris",desc:"Frankreich war eine der mächtigsten europäischen Monarchien.",ruler:"Ludwig XIV.",religion:"Katholisch",pop:"~20 Mio.",lang:"Französisch"},
-  {id:"england",name:"Königreich England",from:1500,to:1707,color:"#a85870",poly:[[55,-2],[55,1.5],[51,1.5],[50,-3],[51,-5],[54,-3]],cap:[51.5,-0.13],capName:"London",desc:"England unter den Tudors und Stuarts. Reformation, Niederlage der spanischen Armada.",ruler:"Elizabeth I.",religion:"Anglikanisch",pop:"~4 Mio.",lang:"Englisch"},
-  {id:"britain",name:"Vereinigtes Königreich",from:1707,to:2025,color:"#a85870",poly:[[59,-5],[58,-1],[55,1.5],[51,1.5],[50,-5],[55,-6],[58,-6]],cap:[51.5,-0.13],capName:"London",desc:"Größtes Empire der Geschichte. Im 19. Jh. kontrolliert es 25% der Welt.",ruler:"König George III / Elizabeth II",religion:"Anglikanisch",pop:"~67 Mio.",lang:"Englisch"},
-  {id:"usa",name:"USA",from:1776,to:2025,color:"#5878a8",poly:[[49,-125],[49,-95],[47,-67],[31,-82],[26,-97],[33,-118],[40,-124]],cap:[38.91,-77.04],capName:"Washington D.C.",desc:"USA als Supermacht. Heute größte Volkswirtschaft, militärisch dominant.",ruler:"Washington → Biden",religion:"Christlich",pop:"~335 Mio.",lang:"Englisch"},
-  {id:"canada",name:"Kanada",from:1867,to:2025,color:"#c8a8a8",poly:[[70,-141],[70,-65],[60,-60],[50,-55],[44,-66],[49,-95],[49,-125],[60,-140]],cap:[45.42,-75.69],capName:"Ottawa",desc:"Britisches Dominion seit 1867. Parlamentarische Demokratie.",ruler:"Premierminister",religion:"Christlich",pop:"~40 Mio.",lang:"Englisch, Französisch"},
-  {id:"mexico",name:"Mexiko",from:1821,to:2025,color:"#d8b888",poly:[[32,-117],[31,-103],[26,-97],[18,-92],[15,-92],[16,-100],[23,-106],[28,-113]],cap:[19.43,-99.13],capName:"Mexiko-Stadt",desc:"Unabhängig von Spanien 1821. Größtes spanischsprachiges Land.",ruler:"Premierminister",religion:"Katholisch",pop:"~130 Mio.",lang:"Spanisch"},
-  {id:"brazil",name:"Brasilien",from:1822,to:2025,color:"#88a858",poly:[[5,-50],[0,-48],[-5,-35],[-15,-38],[-23,-40],[-33,-53],[-25,-58],[-15,-65],[-5,-70],[2,-65]],cap:[-15.79,-47.88],capName:"Brasília",desc:"Größtes Land Südamerikas. Regionale Großmacht.",ruler:"Präsident",religion:"Katholisch",pop:"~215 Mio.",lang:"Portugiesisch"},
-  {id:"russia_emp",name:"Russisches Reich",from:1721,to:1917,color:"#7a8a5a",poly:[[78,30],[77,180],[60,180],[50,140],[42,80],[42,55],[45,40],[55,30],[68,28]],cap:[59.94,30.31],capName:"St. Petersburg",desc:"Peter der Große modernisiert Russland. Größtes zusammenhängendes Reich der Welt.",ruler:"Peter der Große / Katharina II.",religion:"Orthodox",pop:"~125 Mio.",lang:"Russisch"},
-  {id:"ussr",name:"Sowjetunion",from:1922,to:1991,color:"#a04040",poly:[[78,30],[77,180],[60,180],[50,140],[42,80],[42,55],[45,40],[55,30],[68,28]],cap:[55.75,37.62],capName:"Moskau",desc:"Erster sozialistischer Staat. Sieg im 2. Weltkrieg. Kalter Krieg. Zerfall 1991.",ruler:"Lenin → Stalin → Gorbatschow",religion:"Atheismus",pop:"~290 Mio.",lang:"Russisch"},
-  {id:"russia_fed",name:"Russische Föderation",from:1991,to:2025,color:"#7a8a5a",poly:[[78,30],[77,180],[60,180],[50,140],[42,80],[42,55],[50,40],[60,30],[68,28]],cap:[55.75,37.62],capName:"Moskau",desc:"Nach Zerfall der Sowjetunion. Atommacht. Größtes Land der Welt.",ruler:"Putin",religion:"Orthodox",pop:"~144 Mio.",lang:"Russisch"},
-  {id:"ming",name:"Ming-Dynastie",from:1500,to:1644,color:"#a04848",poly:[[42,108],[42,124],[35,122],[28,118],[22,108],[22,98],[28,96],[35,98],[40,100]],cap:[39.91,116.4],capName:"Peking",desc:"Ming-Dynastie regiert China. Erbaute die Verbotene Stadt. Zheng Hes Schatzflotten.",ruler:"Wanli-Kaiser",religion:"Konfuzianismus",pop:"~160 Mio.",lang:"Chinesisch"},
-  {id:"qing",name:"Qing-Dynastie",from:1644,to:1912,color:"#a04848",poly:[[52,80],[50,128],[42,134],[28,122],[22,108],[22,96],[35,82],[45,78]],cap:[39.91,116.4],capName:"Peking",desc:"Mandschurische Qing-Dynastie. Größte Ausdehnung Chinas. Niedergang im 19. Jh.",ruler:"Kangxi / Qianlong",religion:"Konfuzianismus",pop:"~430 Mio.",lang:"Mandarin"},
-  {id:"prc",name:"Volksrepublik China",from:1949,to:2025,color:"#a04848",poly:[[50,80],[48,128],[40,134],[28,122],[22,108],[22,96],[35,82],[45,78]],cap:[39.91,116.4],capName:"Peking",desc:"Mao gründet die VR China. Heute zweitgrößte Volkswirtschaft, aufsteigende Supermacht.",ruler:"Mao → Xi Jinping",religion:"Atheismus",pop:"~1,4 Mrd.",lang:"Mandarin"},
-  {id:"mughal",name:"Mogulreich",from:1526,to:1857,color:"#5a9870",poly:[[34,68],[35,78],[33,90],[26,92],[20,88],[16,76],[19,70],[26,68],[32,67]],cap:[28.61,77.21],capName:"Delhi / Agra",desc:"Eines der mächtigsten Reiche der Welt. Erbauer des Taj Mahal.",ruler:"Akbar / Aurangzeb",religion:"Islam",pop:"~150 Mio.",lang:"Persisch"},
-  {id:"british_raj",name:"Britisch-Indien",from:1858,to:1947,color:"#a85870",poly:[[35,68],[36,78],[34,90],[26,93],[20,90],[14,76],[8,77],[12,74],[19,70],[26,67]],cap:[28.61,77.21],capName:"Kalkutta",desc:"Das 'Juwel der Krone'. Indische Unabhängigkeitsbewegung unter Gandhi.",ruler:"Britischer Vizekönig",religion:"Hinduismus",pop:"~390 Mio.",lang:"Englisch"},
-  {id:"india_rep",name:"Republik Indien",from:1947,to:2025,color:"#5a9870",poly:[[35,68],[36,78],[28,89],[22,92],[20,88],[14,76],[8,77],[12,74],[19,70],[26,67]],cap:[28.61,77.21],capName:"Neu-Delhi",desc:"Größte Demokratie der Welt. Atommacht. IT-Boom. Heute bevölkerungsreichstes Land.",ruler:"Modi",religion:"Hinduismus",pop:"~1,4 Mrd.",lang:"Hindi, Englisch"},
-  {id:"japan_edo",name:"Japan (Tokugawa)",from:1603,to:1868,color:"#c89888",poly:[[45,140],[42,145],[35,140],[33,131],[35,130],[40,138]],cap:[35.68,139.65],capName:"Edo (Tokio)",desc:"250 Jahre Frieden. Kulturelle Blüte: Kabuki, Ukiyo-e. Sakoku-Politik.",ruler:"Tokugawa-Shogun",religion:"Shinto",pop:"~30 Mio.",lang:"Japanisch"},
-  {id:"japan_meiji",name:"Kaiserreich Japan",from:1868,to:1945,color:"#c89888",poly:[[50,140],[45,148],[35,140],[30,128],[33,128],[40,135]],cap:[35.68,139.65],capName:"Tokio",desc:"Meiji-Restauration. Moderne Großmacht. Sieg gegen Russland 1905. 2. Weltkrieg.",ruler:"Kaiser Meiji / Hirohito",religion:"Shintō",pop:"~70 Mio.",lang:"Japanisch"},
-  {id:"japan_modern",name:"Japan",from:1945,to:2025,color:"#c89888",poly:[[45,140],[42,145],[35,140],[33,131],[35,130],[40,138]],cap:[35.68,139.65],capName:"Tokio",desc:"Nachkriegs-Wirtschaftswunder. Drittgrößte Volkswirtschaft. Technologieführer.",ruler:"Kaiser (zeremoniell)",religion:"Shinto",pop:"~125 Mio.",lang:"Japanisch"},
-  {id:"safavid",name:"Safawidenreich",from:1501,to:1736,color:"#5878a4",poly:[[40,44],[40,62],[33,64],[27,58],[27,48],[33,44]],cap:[32.65,51.67],capName:"Isfahan",desc:"Schah Ismail machte den Schiitischen Islam zur Staatsreligion.",ruler:"Schah Abbas",religion:"Islam (Schiitisch)",pop:"~8 Mio.",lang:"Persisch"},
-  {id:"iran_islamic",name:"Islamische Republik Iran",from:1979,to:2025,color:"#5878a4",poly:[[39,44],[40,62],[32,64],[26,58],[27,48],[33,44]],cap:[35.69,51.39],capName:"Teheran",desc:"Nach der Islamischen Revolution gegen Schah Pahlavi 1979.",ruler:"Oberster Führer",religion:"Islam",pop:"~88 Mio.",lang:"Persisch"},
-  {id:"aztec",name:"Aztekenreich",from:1500,to:1521,color:"#c8a850",poly:[[22,-103],[21,-97],[18,-96],[16,-99],[18,-103]],cap:[19.43,-99.13],capName:"Tenochtitlán",desc:"Eine der größten Städte der Welt. Zerstört 1521 durch Cortés.",ruler:"Moctezuma II.",religion:"Polytheismus",pop:"~5-6 Mio.",lang:"Nahuatl"},
-  {id:"inca",name:"Inkareich",from:1500,to:1533,color:"#d8a468",poly:[[2,-78],[-2,-79],[-13,-77],[-18,-72],[-22,-68],[-15,-70],[-8,-77]],cap:[-13.53,-71.97],capName:"Cusco",desc:"Größtes Reich im vorkolumbianischen Amerika. Machu Picchu. Erobert 1533.",ruler:"Atahualpa",religion:"Sonnenkult",pop:"~10-12 Mio.",lang:"Quechua"},
-  {id:"ethiopia",name:"Äthiopien",from:1500,to:2025,color:"#7ab098",poly:[[15,33],[15,42],[8,48],[3,45],[3,38],[8,33]],cap:[9.03,38.74],capName:"Addis Abeba",desc:"Eines der ältesten Reiche der Welt. Christlich seit 4. Jh. Schlug 1896 die Italiener.",ruler:"Kaiser / Premier",religion:"Orthodox-Christlich",pop:"~120 Mio.",lang:"Amharisch"},
-  {id:"egypt",name:"Ägypten",from:1922,to:2025,color:"#d8c098",poly:[[31,25],[31,35],[22,36],[22,25]],cap:[30.05,31.24],capName:"Kairo",desc:"Unabhängig ab 1922. Republik 1953. Arabische Großmacht.",ruler:"Präsident",religion:"Islam",pop:"~110 Mio.",lang:"Arabisch"},
-  {id:"south_africa",name:"Südafrika",from:1910,to:2025,color:"#88a868",poly:[[-22,17],[-22,33],[-28,32],[-35,23],[-32,18]],cap:[-25.75,28.19],capName:"Kapstadt/Pretoria",desc:"Apartheid 1948-1994. Nelson Mandela erster schwarzer Präsident.",ruler:"Ramaphosa",religion:"Christlich",pop:"~60 Mio.",lang:"11 Sprachen"},
-  {id:"italy_kingdom",name:"Königreich Italien",from:1861,to:1946,color:"#c8a878",poly:[[46,7],[46,13],[44,13],[40,18],[37,15],[40,8]],cap:[41.9,12.5],capName:"Rom",desc:"Geeint durch Garibaldi und Cavour. Risorgimento. Faschismus unter Mussolini.",ruler:"Viktor Emanuel / Mussolini",religion:"Katholisch",pop:"~45 Mio.",lang:"Italienisch"},
-  {id:"italy_rep",name:"Italien",from:1946,to:2025,color:"#c8a878",poly:[[46,7],[46,13],[44,13],[40,18],[37,15],[40,8]],cap:[41.9,12.5],capName:"Rom",desc:"Nachkriegsrepublik. EU-Gründungsmitglied.",ruler:"Premierminister",religion:"Katholisch",pop:"~59 Mio.",lang:"Italienisch"},
-  {id:"germany_emp",name:"Deutsches Kaiserreich",from:1871,to:1918,color:"#9b8bc4",poly:[[55,6],[55,23],[51,22],[49,12],[51,7]],cap:[52.52,13.4],capName:"Berlin",desc:"Reichsgründung 1871. Industriemacht. Niederlage im 1. Weltkrieg.",ruler:"Wilhelm II.",religion:"Protestantisch",pop:"~65 Mio.",lang:"Deutsch"},
-  {id:"nazi",name:"Drittes Reich",from:1933,to:1945,color:"#5a3030",poly:[[56,5],[56,30],[50,28],[45,15],[48,8],[51,5]],cap:[52.52,13.4],capName:"Berlin",desc:"Hitlers Diktatur. 2. Weltkrieg. Holocaust ~6 Mio. Tote. Niederlage 1945.",ruler:"Adolf Hitler",religion:"manipuliert",pop:"~70 Mio.",lang:"Deutsch"},
-  {id:"germany_mod",name:"Deutschland",from:1949,to:2025,color:"#9b8bc4",poly:[[55,6],[54,15],[51,15],[48,10],[51,6]],cap:[52.52,13.4],capName:"Berlin",desc:"Wiedervereinigung 1990. Größte Volkswirtschaft Europas. EU-Lokomotive.",ruler:"Scholz",religion:"Christlich",pop:"~84 Mio.",lang:"Deutsch"},
-  {id:"france_mod",name:"Frankreich",from:1815,to:2025,color:"#5870a8",poly:[[51,2],[50,8],[48,8],[44,7],[43,3],[43,-1],[46,-2],[49,-1],[51,2]],cap:[48.86,2.35],capName:"Paris",desc:"Heute Fünfte Republik. EU-Gründungsmitglied. Atommacht.",ruler:"Macron",religion:"Katholisch",pop:"~68 Mio.",lang:"Französisch"},
-  {id:"eu",name:"Europäische Union",from:1993,to:2025,color:"#3a5da8",poly:[[60,-9],[60,30],[36,30],[36,-9]],cap:[50.85,4.35],capName:"Brüssel",desc:"Wirtschafts- und Politikbund. 27 Mitglieder. Euro 2002. Größter Binnenmarkt.",ruler:"Von der Leyen",religion:"Säkular",pop:"~448 Mio.",lang:"24 Sprachen"},
-  {id:"australia",name:"Australien",from:1901,to:2025,color:"#a85870",poly:[[-12,113],[-15,135],[-18,147],[-30,153],[-38,140],[-32,118],[-23,113]],cap:[-35.28,149.13],capName:"Canberra",desc:"Föderaler Staat. Wohlhabende Demokratie. Commonwealth-Mitglied.",ruler:"Premierminister",religion:"Christlich",pop:"~26 Mio.",lang:"Englisch"},
+// ======= HELPER: Stars =======
+function starsHTML(n){
+  let s='';
+  for(let i=0;i<5;i++) s+=i<n?'<span class="stars">★</span>':'<span class="star-empty">★</span>';
+  return s;
+}
+
+// Helper: find the right era for a country at a given year
+function getEra(country, year){
+  return country.eras.find(e=>year>=e.from&&year<=e.to);
+}
+
+// ======= COUNTRIES WITH ERAS =======
+const COUNTRIES = [
+  // ===== SPANIEN =====
+  {id:"spain",poly:[[44,-9.5],[43.5,-2],[42.5,3.2],[40,3.5],[38,0],[36.7,-2],[36.3,-5.5],[36.7,-7.5],[37,-9],[39,-9.5],[42,-9.5]],
+  eras:[
+    {from:1500,to:1700,name:"Spanien (Habsburger)",cap:[40.42,-3.7],capName:"Madrid",
+      desc:"Das Goldene Zeitalter Spaniens. Nach Kolumbus' Entdeckung Amerikas 1492 fließt Gold und Silber aus der Neuen Welt. Spanien ist die mächtigste Nation Europas unter Karl V. und Philipp II.",
+      ruler:"Karl V. / Philipp II.",religion:"Katholisch",pop:"~8 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:5,militaer:5,kultur:4,einfluss:5,innovation:3}},
+    {from:1700,to:1808,name:"Spanien (Bourbonen)",cap:[40.42,-3.7],capName:"Madrid",
+      desc:"Nach dem Erbfolgekrieg regieren die Bourbonen. Spanien verliert die Niederlande und Gebiete in Italien. Die Kolonien bleiben, aber die Wirtschaft stagniert.",
+      ruler:"Philipp V. / Karl III.",religion:"Katholisch",pop:"~10 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:3,einfluss:4,innovation:2}},
+    {from:1808,to:1900,name:"Spanien (Niedergang)",cap:[40.42,-3.7],capName:"Madrid",
+      desc:"Napoleon besetzt Spanien. Lateinamerikanische Kolonien werden unabhängig. 1898 verliert Spanien Kuba, Puerto Rico und die Philippinen im Krieg gegen die USA.",
+      ruler:"Isabella II. / Alfons XII.",religion:"Katholisch",pop:"~18 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:2,innovation:2}},
+    {from:1900,to:1975,name:"Spanien (Bürgerkrieg & Franco)",cap:[40.42,-3.7],capName:"Madrid",
+      desc:"Bürgerkrieg 1936-39. Franco-Diktatur bis 1975. Spanien ist isoliert, arm und rückständig. Erst in den 60ern beginnt wirtschaftliche Öffnung durch Tourismus.",
+      ruler:"Franco (Diktator)",religion:"Katholisch",pop:"~35 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:2,einfluss:1,innovation:1}},
+    {from:1975,to:2025,name:"Spanien (Demokratie)",cap:[40.42,-3.7],capName:"Madrid",
+      desc:"Übergang zur Demokratie nach Francos Tod. EU-Beitritt 1986. Wirtschaftsboom. Heute parlamentarische Monarchie und beliebtes Touristenziel.",
+      ruler:"König Felipe VI.",religion:"Katholisch (säkular)",pop:"~47 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:5,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== FRANKREICH =====
+  {id:"france",poly:[[51.1,2.5],[50,6.5],[48.5,8],[47,7.5],[46.5,6.5],[45.5,7],[44,6.8],[43.5,3.5],[42.5,3],[43,-1.5],[43.8,-1.8],[46,-1.8],[47,-2.5],[48.5,-4.5],[49,-1.2],[51.1,2.5]],
+  eras:[
+    {from:1500,to:1643,name:"Königreich Frankreich",cap:[48.86,2.35],capName:"Paris",
+      desc:"Frankreich unter den Valois, dann den Bourbonen. Religionskriege zwischen Katholiken und Hugenotten. Heinrich IV. bringt Frieden mit dem Edikt von Nantes (1598).",
+      ruler:"Franz I. / Heinrich IV.",religion:"Katholisch",pop:"~16 Mio.",lang:"Französisch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:4,innovation:4}},
+    {from:1643,to:1789,name:"Frankreich (Sonnenkönig)",cap:[48.86,2.35],capName:"Paris / Versailles",
+      desc:"Ludwig XIV. baut Versailles und macht Frankreich zur kulturellen Hauptstadt Europas. Absolutismus auf dem Höhepunkt. Aber: Schulden wachsen, Volk hungert.",
+      ruler:"Ludwig XIV. / Ludwig XVI.",religion:"Katholisch",pop:"~28 Mio.",lang:"Französisch",
+      ratings:{wirtschaft:3,militaer:5,kultur:5,einfluss:5,innovation:4}},
+    {from:1789,to:1815,name:"Frankreich (Revolution & Napoleon)",cap:[48.86,2.35],capName:"Paris",
+      desc:"Die Französische Revolution stürzt die Monarchie. Napoleon krönt sich 1804 zum Kaiser und dominiert ganz Europa. Endet in Waterloo 1815.",
+      ruler:"Napoleon Bonaparte",religion:"Säkular",pop:"~29 Mio.",lang:"Französisch",
+      ratings:{wirtschaft:3,militaer:5,kultur:4,einfluss:5,innovation:4}},
+    {from:1815,to:1940,name:"Frankreich (Republiken)",cap:[48.86,2.35],capName:"Paris",
+      desc:"Restaurierte Monarchie, dann 2. und 3. Republik. Großes Kolonialreich in Afrika und Asien. Eiffelturm 1889. Schwere Verluste im 1. Weltkrieg.",
+      ruler:"Verschiedene Präsidenten",religion:"Katholisch (säkular)",pop:"~41 Mio.",lang:"Französisch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:4,innovation:4}},
+    {from:1940,to:2025,name:"Frankreich (Moderne)",cap:[48.86,2.35],capName:"Paris",
+      desc:"Besetzt im 2. Weltkrieg. De Gaulle gründet die 5. Republik 1958. EU-Gründungsmitglied. Atommacht. Kulturelle Weltmacht. UNO-Sicherheitsrat.",
+      ruler:"Macron (heute)",religion:"Säkular",pop:"~68 Mio.",lang:"Französisch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:4,innovation:4}}
+  ]},
+
+  // ===== VEREINIGTES KÖNIGREICH =====
+  {id:"uk",poly:[[58.5,-5],[58,-3],[57.5,-2],[56,-2.5],[55.5,-1.5],[55,1.5],[53,1],[52,1.5],[51.5,1.2],[51,-1],[50.5,-3.5],[50,-5.5],[51,-5.3],[52,-4.5],[52.5,-4],[53,-3],[53.5,-3.2],[54.5,-3.5],[55,-5.5],[55.5,-6],[56,-5.5],[57,-5.8],[57.5,-5],[58,-5.5],[58.5,-5]],
+  eras:[
+    {from:1500,to:1603,name:"England (Tudors)",cap:[51.5,-0.13],capName:"London",
+      desc:"Heinrich VIII. bricht mit Rom und gründet die anglikanische Kirche. Elizabeth I. besiegt die Spanische Armada 1588. Shakespeare schreibt seine Werke. Beginn des Empire.",
+      ruler:"Heinrich VIII. / Elizabeth I.",religion:"Anglikanisch",pop:"~4 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:5,einfluss:3,innovation:3}},
+    {from:1603,to:1707,name:"England & Schottland (Stuarts)",cap:[51.5,-0.13],capName:"London",
+      desc:"Die Stuarts vereinen die Kronen. Bürgerkrieg 1642-51, Hinrichtung Karls I. Oliver Cromwell als Lord Protector. Glorious Revolution 1688 bringt parlamentarische Monarchie.",
+      ruler:"Jakob I. / Karl I. / Cromwell",religion:"Anglikanisch / Presbyterianisch",pop:"~6 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:4,einfluss:3,innovation:4}},
+    {from:1707,to:1837,name:"Großbritannien (Aufstieg)",cap:[51.5,-0.13],capName:"London",
+      desc:"Vereinigung mit Schottland 1707. Industrielle Revolution beginnt! Dampfmaschine, Fabriken, Eisenbahn. Verlust der 13 Kolonien 1776, aber Empire wächst in Indien und Australien.",
+      ruler:"George III.",religion:"Anglikanisch",pop:"~16 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:5,militaer:4,kultur:4,einfluss:4,innovation:5}},
+    {from:1837,to:1914,name:"Britisches Empire (Viktorianisch)",cap:[51.5,-0.13],capName:"London",
+      desc:"Königin Victoria regiert das größte Empire der Geschichte – 25% der Erdoberfläche! 'Die Sonne geht nie unter.' Industriemacht Nr. 1. Aber: soziale Ungleichheit.",
+      ruler:"Königin Victoria",religion:"Anglikanisch",pop:"~45 Mio. (UK)",lang:"Englisch",
+      ratings:{wirtschaft:5,militaer:5,kultur:4,einfluss:5,innovation:5}},
+    {from:1914,to:2025,name:"Vereinigtes Königreich (Modern)",cap:[51.5,-0.13],capName:"London",
+      desc:"Zwei Weltkriege. Empire zerfällt. NHS gegründet 1948. EU-Beitritt 1973, Brexit 2020. Heute: Finanzzentrum London, kulturelle Soft Power, Atommacht.",
+      ruler:"Elizabeth II. → Charles III.",religion:"Anglikanisch",pop:"~67 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:4,innovation:4}}
+  ]},
+
+  // ===== DEUTSCHLAND =====
+  {id:"germany",poly:[[55,8],[54.5,14],[53.5,14.5],[51.5,15],[51,14.5],[50.5,12],[49,13.5],[48,13.5],[47.5,13],[47.3,10],[47.5,7.5],[48,6],[49,6.5],[50,6],[51,6],[51.5,7],[53,7],[54,9]],
+  eras:[
+    {from:1500,to:1648,name:"Heiliges Röm. Reich (Reformation)",cap:[48.21,16.37],capName:"Wien / Prag",
+      desc:"Martin Luthers Reformation 1517 spaltet das Reich. 30-jähriger Krieg (1618-48) verwüstet Deutschland – ein Drittel der Bevölkerung stirbt.",
+      ruler:"Karl V. / Ferdinand II.",religion:"Kath. & Protestant.",pop:"~16 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:3,militaer:3,kultur:4,einfluss:3,innovation:3}},
+    {from:1648,to:1806,name:"Heiliges Röm. Reich (Spätzeit)",cap:[48.21,16.37],capName:"Wien",
+      desc:"Nach dem Westfälischen Frieden: ~300 Kleinstaaten. Preußen steigt auf unter Friedrich dem Großen. Aufklärung: Kant, Goethe, Beethoven.",
+      ruler:"Leopold I. / Friedrich d. Große",religion:"Gemischt",pop:"~24 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:3,militaer:3,kultur:5,einfluss:3,innovation:4}},
+    {from:1806,to:1871,name:"Deutscher Bund",cap:[52.52,13.4],capName:"Frankfurt / Berlin",
+      desc:"Napoleon löst das HRR auf. Wiener Kongress 1815 schafft den Deutschen Bund. Revolutionen 1848 scheitern. Bismarck einigt Deutschland durch 'Blut und Eisen'.",
+      ruler:"Diverse / Bismarck",religion:"Gemischt",pop:"~35 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:3,innovation:4}},
+    {from:1871,to:1918,name:"Deutsches Kaiserreich",cap:[52.52,13.4],capName:"Berlin",
+      desc:"Reichsgründung 1871 in Versailles. Industriemacht Nr. 2 weltweit. Kolonialmacht. Wilhelm II. treibt aggressive Außenpolitik. Niederlage im 1. Weltkrieg.",
+      ruler:"Wilhelm I. / Wilhelm II.",religion:"Protestant. / Kath.",pop:"~65 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:5,militaer:5,kultur:5,einfluss:4,innovation:5}},
+    {from:1918,to:1945,name:"Weimar & Drittes Reich",cap:[52.52,13.4],capName:"Berlin",
+      desc:"Weimarer Republik scheitert. Hitler kommt 1933 an die Macht. Holocaust: 6 Mio. Juden ermordet. 2. Weltkrieg: 70-85 Mio. Tote. Totale Niederlage 1945.",
+      ruler:"Hindenburg → Hitler",religion:"Manipuliert",pop:"~70 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:4,militaer:5,kultur:2,einfluss:4,innovation:4}},
+    {from:1945,to:2025,name:"Deutschland (BRD)",cap:[52.52,13.4],capName:"Bonn → Berlin",
+      desc:"Geteilt in BRD und DDR. Wirtschaftswunder in den 50ern. Wiedervereinigung 1990. Heute: größte Volkswirtschaft Europas, EU-Motor, exportstark.",
+      ruler:"Adenauer → Merkel → Scholz",religion:"Christlich (säkular)",pop:"~84 Mio.",lang:"Deutsch",
+      ratings:{wirtschaft:5,militaer:3,kultur:4,einfluss:5,innovation:5}}
+  ]},
+
+  // ===== USA =====
+  {id:"usa",poly:[[49,-124],[49,-95],[47,-88],[45,-82],[43,-79],[41,-74],[40,-74],[38,-76],[35,-75.5],[30,-81],[25,-80],[25,-97],[28,-97],[32,-106],[32,-117],[34,-120],[38,-123],[42,-124],[46,-124]],
+  eras:[
+    {from:1500,to:1607,name:"Indigene Völker Nordamerikas",cap:null,capName:null,
+      desc:"Hunderte indigene Nationen leben in Nordamerika: Irokesen, Cherokee, Sioux, Apache, Pueblo. Komplexe Gesellschaften mit eigener Kultur, Sprache und Religion.",
+      ruler:"Stammeshäuptlinge",religion:"Vielfältig",pop:"~5-15 Mio.",lang:"Hunderte Sprachen",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:1,innovation:2}},
+    {from:1607,to:1776,name:"13 Britische Kolonien",cap:[39.95,-75.17],capName:"Philadelphia",
+      desc:"Englische Kolonisten gründen Jamestown (1607) und Plymouth (1620). Sklaverei wird eingeführt. Konflikte mit Frankreich und indigenen Völkern. Wachsender Widerstand gegen britische Steuern.",
+      ruler:"Brit. Gouverneure",religion:"Protestantisch",pop:"~2,5 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:3,einfluss:1,innovation:3}},
+    {from:1776,to:1865,name:"USA (Junge Republik)",cap:[38.91,-77.04],capName:"Washington D.C.",
+      desc:"Unabhängigkeitserklärung 1776. Verfassung 1787. Louisiana Purchase 1803. Expansion nach Westen – 'Manifest Destiny'. Aber: Sklaverei spaltet die Nation.",
+      ruler:"Washington → Lincoln",religion:"Protestantisch",pop:"~31 Mio. (1860)",lang:"Englisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:3,einfluss:2,innovation:4}},
+    {from:1865,to:1945,name:"USA (Aufstieg zur Weltmacht)",cap:[38.91,-77.04],capName:"Washington D.C.",
+      desc:"Nach dem Bürgerkrieg: Industrialisierung, Eisenbahn, Einwanderungswellen. Im 1. Weltkrieg entscheidend. Roaring Twenties, dann Weltwirtschaftskrise. Im 2. Weltkrieg: Atombombe.",
+      ruler:"Roosevelt → Truman",religion:"Christlich",pop:"~140 Mio. (1945)",lang:"Englisch",
+      ratings:{wirtschaft:5,militaer:5,kultur:4,einfluss:5,innovation:5}},
+    {from:1945,to:2025,name:"USA (Supermacht)",cap:[38.91,-77.04],capName:"Washington D.C.",
+      desc:"Einzige Supermacht nach dem Kalten Krieg. NASA, Silicon Valley, Hollywood. Aber auch: Vietnam, Irak, soziale Spannungen. Heute größte Volkswirtschaft und Militärmacht.",
+      ruler:"Kennedy → Obama → Biden",religion:"Christlich (divers)",pop:"~335 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:5,militaer:5,kultur:5,einfluss:5,innovation:5}}
+  ]},
+
+  // ===== RUSSLAND =====
+  {id:"russia",poly:[[70,30],[72,50],[75,80],[77,100],[76,140],[72,175],[65,178],[60,170],[55,155],[50,140],[48,130],[46,90],[44,60],[44,50],[46,40],[50,38],[55,30],[60,28],[65,30]],
+  eras:[
+    {from:1500,to:1682,name:"Zarentum Russland",cap:[55.75,37.62],capName:"Moskau",
+      desc:"Iwan der Schreckliche (1547-84) wird erster Zar. Eroberung Sibiriens beginnt. Wirren nach Iwans Tod. Romanow-Dynastie ab 1613 stabilisiert das Land.",
+      ruler:"Iwan IV. / Michael I.",religion:"Russisch-Orthodox",pop:"~14 Mio.",lang:"Russisch",
+      ratings:{wirtschaft:2,militaer:3,kultur:2,einfluss:2,innovation:1}},
+    {from:1682,to:1796,name:"Russisches Reich (Peter & Katharina)",cap:[59.94,30.31],capName:"St. Petersburg",
+      desc:"Peter der Große modernisiert Russland nach westlichem Vorbild. Gründet St. Petersburg 1703. Katharina die Große erweitert das Reich enorm und fördert die Aufklärung.",
+      ruler:"Peter der Große / Katharina II.",religion:"Russisch-Orthodox",pop:"~35 Mio.",lang:"Russisch",
+      ratings:{wirtschaft:3,militaer:4,kultur:3,einfluss:4,innovation:3}},
+    {from:1796,to:1917,name:"Russisches Reich (Spätzeit)",cap:[59.94,30.31],capName:"St. Petersburg",
+      desc:"Sieg über Napoleon 1812. Aber: Leibeigenschaft bis 1861. Industrialisierung kommt spät. Niederlage gegen Japan 1905. Revolution 1917 beendet das Zarenreich.",
+      ruler:"Alexander I. → Nikolaus II.",religion:"Orthodox",pop:"~125 Mio.",lang:"Russisch",
+      ratings:{wirtschaft:3,militaer:4,kultur:5,einfluss:4,innovation:3}},
+    {from:1917,to:1991,name:"Sowjetunion",cap:[55.75,37.62],capName:"Moskau",
+      desc:"Bolschewistische Revolution. Stalin: Industrialisierung + Terror. Sieg im 2. Weltkrieg (27 Mio. Tote). Kalter Krieg, Sputnik, Atomwaffen. Zerfall 1991 unter Gorbatschow.",
+      ruler:"Lenin → Stalin → Gorbatschow",religion:"Staatsatheismus",pop:"~290 Mio.",lang:"Russisch",
+      ratings:{wirtschaft:3,militaer:5,kultur:4,einfluss:5,innovation:4}},
+    {from:1991,to:2025,name:"Russische Föderation",cap:[55.75,37.62],capName:"Moskau",
+      desc:"Zerfall der UdSSR. Wirtschaftschaos in den 90ern. Putin ab 2000. Atommacht, Energieexporteur. Krim-Annexion 2014. Krieg in der Ukraine seit 2022.",
+      ruler:"Jelzin → Putin",religion:"Orthodox",pop:"~144 Mio.",lang:"Russisch",
+      ratings:{wirtschaft:3,militaer:5,kultur:3,einfluss:4,innovation:3}}
+  ]},
+
+  // ===== CHINA =====
+  {id:"china",poly:[[50,87],[49,120],[45,130],[40,128],[35,122],[30,121],[25,120],[22,114],[21,109],[22,100],[24,98],[28,97],[30,95],[35,79],[37,75],[40,80],[45,80],[48,85]],
+  eras:[
+    {from:1500,to:1644,name:"Ming-Dynastie",cap:[39.91,116.4],capName:"Peking",
+      desc:"Die Ming erbauen die Verbotene Stadt und die Große Mauer. Admiral Zheng He erkundet mit riesigen Flotten Afrika. China ist die größte Volkswirtschaft der Welt.",
+      ruler:"Wanli-Kaiser",religion:"Konfuzianismus / Buddhismus",pop:"~160 Mio.",lang:"Chinesisch",
+      ratings:{wirtschaft:5,militaer:4,kultur:5,einfluss:4,innovation:4}},
+    {from:1644,to:1800,name:"Qing-Dynastie (Blütezeit)",cap:[39.91,116.4],capName:"Peking",
+      desc:"Die Mandschu erobern China. Unter Kangxi und Qianlong: größte Ausdehnung, wirtschaftliche Blüte, Bevölkerung verdreifacht sich. China produziert 1/3 der Weltwirtschaft.",
+      ruler:"Kangxi / Qianlong",religion:"Konfuzianismus",pop:"~300 Mio.",lang:"Mandarin",
+      ratings:{wirtschaft:5,militaer:4,kultur:5,einfluss:4,innovation:3}},
+    {from:1800,to:1912,name:"Qing-Dynastie (Niedergang)",cap:[39.91,116.4],capName:"Peking",
+      desc:"Opiumkriege gegen Großbritannien. Ungleiche Verträge. Taiping-Aufstand (20-30 Mio. Tote!). Boxer-Aufstand 1900. Revolution 1911 beendet das Kaiserreich.",
+      ruler:"Cixi (Kaiserinwitwe)",religion:"Konfuzianismus",pop:"~430 Mio.",lang:"Mandarin",
+      ratings:{wirtschaft:2,militaer:1,kultur:3,einfluss:2,innovation:1}},
+    {from:1912,to:1949,name:"Republik China (Bürgerkrieg)",cap:[39.91,116.4],capName:"Nanjing / Chongqing",
+      desc:"Chaotische Warlord-Ära. Bürgerkrieg Kuomintang vs. Kommunisten. Japan besetzt die Ostküste (Massaker von Nanjing). Kommunisten siegen 1949.",
+      ruler:"Sun Yatsen → Chiang Kai-shek",religion:"Verschieden",pop:"~540 Mio.",lang:"Mandarin",
+      ratings:{wirtschaft:1,militaer:2,kultur:2,einfluss:2,innovation:1}},
+    {from:1949,to:2025,name:"Volksrepublik China",cap:[39.91,116.4],capName:"Peking",
+      desc:"Mao: Großer Sprung & Kulturrevolution (Millionen Tote). Deng Xiaoping öffnet die Wirtschaft ab 1978. Heute: zweitgrößte Volkswirtschaft, technologischer Aufstieg.",
+      ruler:"Mao → Deng → Xi Jinping",religion:"Atheismus / Buddhismus",pop:"~1,4 Mrd.",lang:"Mandarin",
+      ratings:{wirtschaft:5,militaer:5,kultur:3,einfluss:5,innovation:5}}
+  ]},
+
+  // ===== JAPAN =====
+  {id:"japan",poly:[[45.5,141],[43,145.5],[41,141],[39.5,140],[38,140.5],[36,140.5],[35,140],[34,135],[33,131],[33.5,130.5],[34,131],[35,133],[36,136.5],[37.5,137],[39,140],[41,140],[43,143],[45.5,141]],
+  eras:[
+    {from:1500,to:1603,name:"Japan (Sengoku-Zeit)",cap:[35.01,135.77],capName:"Kyōto",
+      desc:"'Zeitalter der streitenden Reiche'. Daimyō kämpfen um die Macht. Oda Nobunaga, Toyotomi Hideyoshi und Tokugawa Ieyasu vereinen Japan schrittweise.",
+      ruler:"Oda Nobunaga / Hideyoshi",religion:"Shintō / Buddhismus",pop:"~12 Mio.",lang:"Japanisch",
+      ratings:{wirtschaft:2,militaer:4,kultur:3,einfluss:1,innovation:2}},
+    {from:1603,to:1868,name:"Japan (Tokugawa / Edo)",cap:[35.68,139.65],capName:"Edo (Tokio)",
+      desc:"250 Jahre Frieden unter den Tokugawa-Shogunen. Japan schließt sich komplett ab vom Westen (Sakoku). Kulturelle Blüte: Kabuki, Ukiyo-e, Haiku.",
+      ruler:"Tokugawa-Shogun",religion:"Shintō / Buddhismus",pop:"~30 Mio.",lang:"Japanisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:5,einfluss:1,innovation:2}},
+    {from:1868,to:1945,name:"Kaiserreich Japan (Meiji)",cap:[35.68,139.65],capName:"Tokio",
+      desc:"Meiji-Restauration: rasante Modernisierung in 30 Jahren. Sieg gegen Russland 1905. Kolonialmacht: Korea, Taiwan, Mandschurei. 2. Weltkrieg → Hiroshima → Kapitulation.",
+      ruler:"Kaiser Meiji / Hirohito",religion:"Staats-Shintō",pop:"~72 Mio.",lang:"Japanisch",
+      ratings:{wirtschaft:4,militaer:5,kultur:3,einfluss:4,innovation:4}},
+    {from:1945,to:2025,name:"Japan (Nachkrieg)",cap:[35.68,139.65],capName:"Tokio",
+      desc:"Pazifistische Verfassung. Wirtschaftswunder: Toyota, Sony, Nintendo. Drittgrößte Volkswirtschaft. Kulturexport: Anime, Manga, Sushi global beliebt.",
+      ruler:"Kaiser (zeremoniell)",religion:"Shintō / Buddhismus",pop:"~125 Mio.",lang:"Japanisch",
+      ratings:{wirtschaft:5,militaer:3,kultur:5,einfluss:4,innovation:5}}
+  ]},
+
+  // ===== OSMANISCHES REICH / TÜRKEI =====
+  {id:"ottoman",poly:[[42,26],[41.5,28],[41,29],[40.5,30],[39,36],[37.5,36],[36,36],[35.5,37],[34,36],[33,35],[36,28],[38,27],[39,26],[40,27],[41,26]],
+  eras:[
+    {from:1500,to:1683,name:"Osmanisches Reich (Blütezeit)",cap:[41.01,28.98],capName:"Konstantinopel",
+      desc:"Unter Sultan Süleiman dem Prächtigen das mächtigste Reich Europas. Kontrolliert Südosteuropa, Nahen Osten und Nordafrika. Religiöse Toleranz für Christen und Juden.",
+      ruler:"Süleiman der Prächtige",religion:"Islam (Sunnitisch)",pop:"~30 Mio.",lang:"Osmanisch-Türkisch",
+      ratings:{wirtschaft:5,militaer:5,kultur:4,einfluss:5,innovation:3}},
+    {from:1683,to:1830,name:"Osmanisches Reich (Rückgang)",cap:[41.01,28.98],capName:"Konstantinopel",
+      desc:"Scheitern vor Wien 1683 markiert den Wendepunkt. Verlust von Ungarn und Serbien. Reformversuche scheitern an konservativen Kräften. 'Der kranke Mann Europas'.",
+      ruler:"Mahmud II.",religion:"Islam",pop:"~25 Mio.",lang:"Osmanisch-Türkisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:3,einfluss:3,innovation:2}},
+    {from:1830,to:1923,name:"Osmanisches Reich (Endphase)",cap:[41.01,28.98],capName:"Konstantinopel",
+      desc:"Verlust von Griechenland, Ägypten, Balkan. Jungtürken-Revolution 1908. Völkermord an den Armeniern 1915. Niederlage im 1. Weltkrieg. Atatürk gründet die Republik.",
+      ruler:"Abdülhamid II. → Atatürk",religion:"Islam",pop:"~18 Mio.",lang:"Türkisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:2,einfluss:2,innovation:2}},
+    {from:1923,to:2025,name:"Türkei (Republik)",cap:[39.93,32.86],capName:"Ankara",
+      desc:"Atatürk modernisiert radikal: Westliche Kleidung, lateinisches Alphabet, Säkularismus. NATO-Mitglied 1952. Heute zwischen Europa und Asien, Regionalmacht.",
+      ruler:"Atatürk → Erdoğan",religion:"Islam (säkular)",pop:"~85 Mio.",lang:"Türkisch",
+      ratings:{wirtschaft:3,militaer:4,kultur:3,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== INDIEN =====
+  {id:"india",poly:[[35,74],[34,78],[30,80],[28,88],[26,90],[24,89],[22,88.5],[20,87],[18,84],[16,80.5],[14,80],[12,80],[10,79],[8,77],[8.5,76.5],[10,76],[12,75],[14,74.5],[16,73.5],[18,73],[20,73],[22,72],[24,69],[28,68],[32,70],[35,74]],
+  eras:[
+    {from:1500,to:1526,name:"Sultanat Delhi / Vijayanagara",cap:[28.61,77.21],capName:"Delhi",
+      desc:"Nordindien unter dem Lodi-Sultanat. Im Süden das mächtige Hindu-Reich Vijayanagara. Reicher Gewürzhandel mit Europa und Asien.",
+      ruler:"Ibrahim Lodi",religion:"Islam / Hinduismus",pop:"~110 Mio.",lang:"Hindi / Persisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:4,einfluss:3,innovation:3}},
+    {from:1526,to:1707,name:"Mogulreich (Blütezeit)",cap:[28.61,77.21],capName:"Delhi / Agra",
+      desc:"Babur gründet das Mogulreich. Akbar der Große bringt religiöse Toleranz. Shah Jahan baut das Taj Mahal. Eines der reichsten Reiche der Welt.",
+      ruler:"Akbar / Shah Jahan / Aurangzeb",religion:"Islam (tolerant)",pop:"~150 Mio.",lang:"Persisch / Hindi",
+      ratings:{wirtschaft:5,militaer:4,kultur:5,einfluss:4,innovation:3}},
+    {from:1707,to:1857,name:"Mogulreich (Zerfall) & EIC",cap:[22.57,88.36],capName:"Kalkutta",
+      desc:"Mogulreich zerfällt. Die Britische Ostindien-Kompanie (EIC) übernimmt schrittweise. Schlacht von Plassey 1757. Sepoy-Aufstand 1857.",
+      ruler:"EIC / Mogul (Marionette)",religion:"Hinduismus / Islam",pop:"~200 Mio.",lang:"Diverses",
+      ratings:{wirtschaft:3,militaer:2,kultur:3,einfluss:2,innovation:2}},
+    {from:1857,to:1947,name:"Britisch-Indien",cap:[28.61,77.21],capName:"Kalkutta → Delhi",
+      desc:"'Juwel der Krone'. Eisenbahn, Verwaltung, Englisch eingeführt. Gandhi startet gewaltfreien Widerstand. Teilung 1947 in Indien und Pakistan: 1-2 Mio. Tote.",
+      ruler:"Brit. Vizekönig / Gandhi",religion:"Hinduismus / Islam",pop:"~390 Mio.",lang:"Englisch / Hindi",
+      ratings:{wirtschaft:3,militaer:2,kultur:3,einfluss:2,innovation:2}},
+    {from:1947,to:2025,name:"Republik Indien",cap:[28.61,77.21],capName:"Neu-Delhi",
+      desc:"Größte Demokratie der Welt. Nehru baut sozialistisches Modell. Atomtests 1998. IT-Boom ab 2000er. Heute bevölkerungsreichstes Land, aufstrebende Wirtschaftsmacht.",
+      ruler:"Nehru → Modi",religion:"Hinduismus (~80%)",pop:"~1,44 Mrd.",lang:"Hindi / Englisch + 22",
+      ratings:{wirtschaft:4,militaer:4,kultur:4,einfluss:4,innovation:4}}
+  ]},
+
+  // ===== BRASILIEN =====
+  {id:"brazil",poly:[[4,-51],[2,-50],[0,-49],[-2,-44],[-5,-35],[-8,-35],[-12,-38],[-18,-39],[-23,-41],[-29,-49],[-33,-52],[-30,-54],[-25,-57],[-20,-58],[-15,-60],[-10,-67],[-5,-70],[0,-67],[2,-60],[5,-60],[5,-52]],
+  eras:[
+    {from:1500,to:1822,name:"Brasilien (Portugal)",cap:[-12.97,-38.51],capName:"Salvador → Rio",
+      desc:"Portugiesische Kolonie seit 1500. Zucker-Plantagen mit afrikanischen Sklaven. Goldrausch im 18. Jh. König flüchtet 1808 nach Rio vor Napoleon.",
+      ruler:"Port. Statthalter / König",religion:"Katholisch",pop:"~4 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:3,militaer:1,kultur:2,einfluss:1,innovation:1}},
+    {from:1822,to:1889,name:"Kaiserreich Brasilien",cap:[-22.91,-43.17],capName:"Rio de Janeiro",
+      desc:"Pedro I. erklärt 1822 Unabhängigkeit. Konstitutionelle Monarchie. Sklaverei erst 1888 abgeschafft – letztes Land in Amerika! Ein Jahr später wird der Kaiser gestürzt.",
+      ruler:"Pedro I. / Pedro II.",religion:"Katholisch",pop:"~14 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:2,einfluss:2,innovation:2}},
+    {from:1889,to:2025,name:"Brasilien (Republik)",cap:[-15.79,-47.88],capName:"Rio → Brasília",
+      desc:"Republik mit vielen Umbrüchen. Militärdiktatur 1964-85. Neue Hauptstadt Brasília 1960. Wirtschaftsboom und Krise. Heute: regionale Großmacht, Kulturexporteur.",
+      ruler:"Verschiedene Präsidenten",religion:"Katholisch / Evangelisch",pop:"~215 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:5,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== IRAN / PERSIEN =====
+  {id:"iran",poly:[[39.5,44.5],[39.5,48],[38,49],[37.5,54],[37,55],[36.5,61],[33,60],[31,62],[27,63],[25.5,58],[26,54],[27,51.5],[29,50],[30,48.5],[31,48],[32,46],[34,44],[36,44],[38.5,44]],
+  eras:[
+    {from:1501,to:1736,name:"Safawidenreich",cap:[32.65,51.67],capName:"Täbris → Isfahan",
+      desc:"Schah Ismail macht den Schiitischen Islam zur Staatsreligion – prägt Iran bis heute. Schah Abbas erbaut das prächtige Isfahan. Rivale der Osmanen.",
+      ruler:"Schah Abbas der Große",religion:"Islam (Schiitisch)",pop:"~8 Mio.",lang:"Persisch",
+      ratings:{wirtschaft:4,militaer:4,kultur:5,einfluss:3,innovation:3}},
+    {from:1736,to:1925,name:"Persien (Qajar-Dynastie)",cap:[35.69,51.39],capName:"Teheran",
+      desc:"Nach den Safawiden: instabile Dynastien. Die Qajar ab 1789 regieren schwach. Eingeklemmt zwischen Russland und Großbritannien. Konstitutionelle Revolution 1906.",
+      ruler:"Naser al-Din Schah",religion:"Islam (Schiitisch)",pop:"~10 Mio.",lang:"Persisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:2,innovation:1}},
+    {from:1925,to:1979,name:"Iran (Pahlavi-Dynastie)",cap:[35.69,51.39],capName:"Teheran",
+      desc:"Reza Schah modernisiert Iran nach Atatürks Vorbild. Sein Sohn wird vom CIA 1953 an die Macht gebracht. Ölreichtum, aber Unterdrückung. Revolution 1979.",
+      ruler:"Reza Schah / Mohammed Reza",religion:"Islam (säkular)",pop:"~35 Mio.",lang:"Persisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:3,einfluss:3,innovation:3}},
+    {from:1979,to:2025,name:"Islamische Republik Iran",cap:[35.69,51.39],capName:"Teheran",
+      desc:"Islamische Revolution stürzt den Schah. Theokratie unter dem Obersten Führer. Iran-Irak-Krieg (1980-88). Nuklearprogramm. Spannungen mit USA und Israel.",
+      ruler:"Khomeini → Khamenei",religion:"Islam (Schiitisch)",pop:"~88 Mio.",lang:"Persisch",
+      ratings:{wirtschaft:2,militaer:4,kultur:3,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== ITALIEN =====
+  {id:"italy",poly:[[46.5,6.5],[47,12],[46.5,13.5],[45.5,13.5],[44,12.5],[43.5,14],[42,15],[41,16],[40.5,17],[40,18.5],[38.5,16],[38,15.5],[37.5,15.5],[38,13],[40,12.5],[41,14],[42,12],[43,11],[44,9],[44,7.5],[45.5,7]],
+  eras:[
+    {from:1500,to:1800,name:"Italien (Stadtstaaten)",cap:[41.9,12.5],capName:"Rom / Venedig / Florenz",
+      desc:"Flickenteppich: Venedig, Florenz (Medici), Mailand, Kirchenstaat, Neapel. Renaissance-Geburtsort. Leonardo, Michelangelo, Galileo. Aber: ständige Kriege und Fremdherrschaft.",
+      ruler:"Medici / Päpste / diverse",religion:"Katholisch",pop:"~13 Mio.",lang:"Italienisch (Dialekte)",
+      ratings:{wirtschaft:4,militaer:2,kultur:5,einfluss:3,innovation:5}},
+    {from:1800,to:1861,name:"Italien (Napoleon & Risorgimento)",cap:[41.9,12.5],capName:"Turin",
+      desc:"Napoleon vereint Teile Italiens vorübergehend. Danach: Risorgimento – Bewegung zur Einigung. Garibaldi, Mazzini und Cavour arbeiten auf einen Nationalstaat hin.",
+      ruler:"Diverse / Viktor Emanuel",religion:"Katholisch",pop:"~25 Mio.",lang:"Italienisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:4,einfluss:2,innovation:3}},
+    {from:1861,to:1945,name:"Königreich Italien",cap:[41.9,12.5],capName:"Rom",
+      desc:"Einigung 1861. Kolonialmacht in Libyen und Ostafrika. Faschismus unter Mussolini ab 1922. Achse mit Hitler. Wechselt die Seiten 1943. Republik ab 1946.",
+      ruler:"Viktor Emanuel III / Mussolini",religion:"Katholisch",pop:"~45 Mio.",lang:"Italienisch",
+      ratings:{wirtschaft:3,militaer:3,kultur:4,einfluss:3,innovation:3}},
+    {from:1945,to:2025,name:"Italienische Republik",cap:[41.9,12.5],capName:"Rom",
+      desc:"EU-Gründungsmitglied. Wirtschaftswunder in den 50-60ern. Mode, Design, Fiat, Ferrari. Politisch instabil (70+ Regierungen seit 1945). Aber: kulturelle Supermacht.",
+      ruler:"Wechselnde Premiers",religion:"Katholisch (säkular)",pop:"~59 Mio.",lang:"Italienisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:5,einfluss:3,innovation:4}}
+  ]},
+
+  // ===== ÄGYPTEN =====
+  {id:"egypt",poly:[[31.5,25],[31.5,35],[29,35],[27,34],[24,35],[22,36.5],[22,25],[25,25],[29,25]],
+  eras:[
+    {from:1500,to:1805,name:"Ägypten (Osmanisch)",cap:[30.05,31.24],capName:"Kairo",
+      desc:"Osmanische Provinz nach der Eroberung 1517. Mamluken behalten lokale Macht. Napoleon invadiert kurz 1798-1801. Muhammad Ali übernimmt 1805.",
+      ruler:"Osmanischer Gouverneur",religion:"Islam",pop:"~4 Mio.",lang:"Arabisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:3,einfluss:2,innovation:2}},
+    {from:1805,to:1952,name:"Ägypten (Muhammad Ali & Briten)",cap:[30.05,31.24],capName:"Kairo",
+      desc:"Muhammad Ali modernisiert Ägypten. Suezkanal 1869 eröffnet. Britische Besatzung ab 1882. Nominell unabhängig ab 1922, aber britischer Einfluss bleibt.",
+      ruler:"Muhammad Ali → König Faruk",religion:"Islam",pop:"~20 Mio.",lang:"Arabisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:3,einfluss:3,innovation:2}},
+    {from:1952,to:2025,name:"Ägypten (Republik)",cap:[30.05,31.24],capName:"Kairo",
+      desc:"Nassers Revolution. Suez-Krise 1956. Camp-David-Abkommen 1978 (Frieden mit Israel). Mubarak regiert 30 Jahre. Arabischer Frühling 2011. Heute: Regionalmacht.",
+      ruler:"Nasser → Mubarak → Sisi",religion:"Islam",pop:"~110 Mio.",lang:"Arabisch",
+      ratings:{wirtschaft:2,militaer:3,kultur:3,einfluss:3,innovation:2}}
+  ]},
+
+  // ===== ÄTHIOPIEN =====
+  {id:"ethiopia",poly:[[15,36],[14.5,40],[12,42],[9,47],[5,46],[3.5,42],[4,38],[5,36],[8,33],[11,34],[14,36]],
+  eras:[
+    {from:1500,to:1855,name:"Äthiopien (Salomonische Dynastie)",cap:[12.6,37.47],capName:"Gondar",
+      desc:"Eines der ältesten christlichen Reiche. Baut die berühmten Felsenkirchen. Kontakt mit Portugal gegen muslimische Invasionen. Isolation im 18.-19. Jh.",
+      ruler:"Kaiser (Negus Negesti)",religion:"Äthiopisch-Orthodox",pop:"~3 Mio.",lang:"Amharisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:1,innovation:1}},
+    {from:1855,to:1974,name:"Äthiopien (Modernisierung)",cap:[9.03,38.74],capName:"Addis Abeba",
+      desc:"Kaiser Tewodros beginnt Modernisierung. Menelik II. schlägt 1896 die Italiener bei Adwa – einziges afrikanisches Land, das nie kolonisiert wird! Haile Selassie modernisiert weiter.",
+      ruler:"Menelik II. / Haile Selassie",religion:"Äthiopisch-Orthodox",pop:"~25 Mio.",lang:"Amharisch",
+      ratings:{wirtschaft:2,militaer:3,kultur:3,einfluss:2,innovation:1}},
+    {from:1974,to:2025,name:"Äthiopien (Republik)",cap:[9.03,38.74],capName:"Addis Abeba",
+      desc:"Sozialistische Diktatur 1974-91 unter Mengistu. Hungersnot 1984. Demokratisierung ab 1991. Eritrea wird unabhängig 1993. Sitz der Afrikanischen Union.",
+      ruler:"Mengistu → Meles → Abiy",religion:"Orthodox / Islam",pop:"~120 Mio.",lang:"Amharisch",
+      ratings:{wirtschaft:2,militaer:3,kultur:3,einfluss:2,innovation:1}}
+  ]},
+
+  // ===== AUSTRALIEN =====
+  {id:"australia",poly:[[-12,130],[-14,136],[-17,146],[-25,153],[-30,153],[-37,150],[-38,145],[-37,140],[-35,136],[-32,133],[-31,116],[-24,113],[-20,118],[-15,129]],
+  eras:[
+    {from:1500,to:1788,name:"Aborigines-Kulturen",cap:null,capName:null,
+      desc:"Älteste kontinuierliche Kultur der Welt (~65.000 Jahre!). Über 250 Sprachgruppen. Komplexes 'Songlines'-System zur Navigation. Nachhaltige Landnutzung durch kontrollierte Feuer.",
+      ruler:"Stammesälteste",religion:"Traumzeit-Spiritualität",pop:"~750.000",lang:"~250 Sprachen",
+      ratings:{wirtschaft:2,militaer:1,kultur:4,einfluss:1,innovation:2}},
+    {from:1788,to:1901,name:"Brit. Kolonie Australien",cap:[-33.87,151.21],capName:"Sydney",
+      desc:"Sträflingskolonie ab 1788. Goldrausch 1850er bringt Einwanderer. Massive Verdrängung der Aborigines. Sechs Kolonien entstehen. Föderation 1901.",
+      ruler:"Brit. Gouverneur",religion:"Anglikanisch",pop:"~3,8 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:2,einfluss:1,innovation:3}},
+    {from:1901,to:2025,name:"Commonwealth Australien",cap:[-35.28,149.13],capName:"Canberra",
+      desc:"Föderaler Staat. Kämpft in beiden Weltkriegen (Gallipoli). Multikulturelles Einwanderungsland. Rohstoffexporteur. Enge Beziehung zu USA und Asien.",
+      ruler:"Premierminister",religion:"Christlich (divers)",pop:"~26 Mio.",lang:"Englisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:3,einfluss:3,innovation:4}}
+  ]},
+
+  // ===== PORTUGAL =====
+  {id:"portugal_eu",poly:[[42,-8.5],[41.8,-6.5],[38.5,-6.5],[37,-7.5],[37,-9],[39.5,-9.5],[42,-8.8]],
+  eras:[
+    {from:1500,to:1580,name:"Portugal (Goldenes Zeitalter)",cap:[38.72,-9.14],capName:"Lissabon",
+      desc:"Portugal ist DIE Seemacht der Welt. Vasco da Gama erreicht Indien 1498. Brasilien entdeckt 1500. Handelsposten in Afrika, Indien, Macau, Japan. Gewürzmonopol.",
+      ruler:"Manuel I.",religion:"Katholisch",pop:"~1,5 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:5,militaer:4,kultur:4,einfluss:5,innovation:5}},
+    {from:1580,to:1822,name:"Portugal (Niedergang & Kolonie)",cap:[38.72,-9.14],capName:"Lissabon → Rio",
+      desc:"Personalunion mit Spanien 1580-1640 schwächt Portugal. Erdbeben zerstört Lissabon 1755. Napoleon invadiert 1807 – Hof flieht nach Brasilien.",
+      ruler:"Diverse Könige",religion:"Katholisch",pop:"~3 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:3,innovation:2}},
+    {from:1822,to:2025,name:"Portugal (Modern)",cap:[38.72,-9.14],capName:"Lissabon",
+      desc:"Verliert Brasilien 1822. Republik ab 1910. Diktatur Salazar 1933-74. Kolonialkriege in Afrika. Revolution 1974. EU-Beitritt 1986. Heute: stabile Demokratie.",
+      ruler:"Salazar (Diktator) → Demokratie",religion:"Katholisch",pop:"~10 Mio.",lang:"Portugiesisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:4,einfluss:2,innovation:3}}
+  ]},
+
+  // ===== MEXIKO =====
+  {id:"mexico",poly:[[32.5,-117],[32.5,-106],[29.5,-103],[26,-97.5],[21,-97],[19,-96],[17,-91],[15,-92],[16,-93],[16.5,-99],[19,-105],[22,-106],[24,-108],[27.5,-110],[31,-113],[32.5,-117]],
+  eras:[
+    {from:1500,to:1521,name:"Aztekenreich",cap:[19.43,-99.13],capName:"Tenochtitlán",
+      desc:"Tenochtitlán hat 200.000 Einwohner – größer als die meisten europäischen Städte! Pyramiden, Kanäle, Märkte. Menschenopfer an den Sonnengott. 1521 von Cortés erobert.",
+      ruler:"Moctezuma II.",religion:"Polytheismus (Sonnenkult)",pop:"~5-6 Mio.",lang:"Nahuatl",
+      ratings:{wirtschaft:4,militaer:4,kultur:4,einfluss:3,innovation:3}},
+    {from:1521,to:1821,name:"Neuspanien (Kolonie)",cap:[19.43,-99.13],capName:"Mexiko-Stadt",
+      desc:"Vizekönigreich unter Spanien. Silberminen von Potosí und Zacatecas finanzieren das spanische Weltreich. Mischkultur aus Indigenen, Spaniern und Afrikanern.",
+      ruler:"Spanischer Vizekönig",religion:"Katholisch",pop:"~6 Mio.",lang:"Spanisch / Nahuatl",
+      ratings:{wirtschaft:4,militaer:2,kultur:3,einfluss:2,innovation:2}},
+    {from:1821,to:2025,name:"Mexiko (Unabhängig)",cap:[19.43,-99.13],capName:"Mexiko-Stadt",
+      desc:"Unabhängig 1821. Verliert 1848 die Hälfte des Gebiets an die USA. Revolution 1910. Heute: zweitgrößte Volkswirtschaft Lateinamerikas, reiche Kultur.",
+      ruler:"Verschiedene Präsidenten",religion:"Katholisch",pop:"~130 Mio.",lang:"Spanisch",
+      ratings:{wirtschaft:3,militaer:2,kultur:5,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== SÜDAFRIKA =====
+  {id:"south_africa",poly:[[-22,17],[-22.5,29],[-26,32],[-28,32.5],[-30,31],[-31,30],[-33.5,27],[-34.5,20],[-33,18],[-31,17.5],[-29,17],[-24,17]],
+  eras:[
+    {from:1500,to:1652,name:"Khoisan & Bantu-Völker",cap:null,capName:null,
+      desc:"Khoisan (San und Khoikhoi) bewohnen den Süden seit Tausenden von Jahren. Bantu-Völker wie Zulu und Xhosa leben im Osten. Viehhaltung, Handel.",
+      ruler:"Stammeshäuptlinge",religion:"Animismus",pop:"~1 Mio.",lang:"Khoisan / Bantu",
+      ratings:{wirtschaft:2,militaer:2,kultur:3,einfluss:1,innovation:1}},
+    {from:1652,to:1910,name:"Kap-Kolonie / Burenrepubliken",cap:[-33.92,18.42],capName:"Kapstadt",
+      desc:"Niederländische Siedler (Buren) ab 1652. Britische Übernahme 1806. Burenkriege 1880-1902. Goldrausch am Witwatersrand. Cecil Rhodes plant Kap-Kairo-Eisenbahn.",
+      ruler:"Brit. Gouverneur / Burenrepubliken",religion:"Christlich",pop:"~5 Mio.",lang:"Englisch / Afrikaans",
+      ratings:{wirtschaft:3,militaer:3,kultur:2,einfluss:2,innovation:3}},
+    {from:1910,to:2025,name:"Südafrika",cap:[-25.75,28.19],capName:"Pretoria / Kapstadt",
+      desc:"Union 1910. Apartheid 1948-1994 – systematische Rassentrennung. Mandela 27 Jahre Haft. 1994: erste freie Wahlen. Heute größte Volkswirtschaft Afrikas. Soziale Ungleichheit bleibt.",
+      ruler:"Mandela → Ramaphosa",religion:"Christlich",pop:"~60 Mio.",lang:"11 offizielle Sprachen",
+      ratings:{wirtschaft:3,militaer:3,kultur:4,einfluss:3,innovation:3}}
+  ]},
+
+  // ===== KANADA =====
+  {id:"canada",poly:[[70,-141],[72,-95],[68,-65],[60,-57],[49,-55],[44,-66],[42,-80],[49,-95],[49,-125],[55,-130],[60,-139]],
+  eras:[
+    {from:1500,to:1763,name:"Neufrankreich / First Nations",cap:[46.81,-71.21],capName:"Québec",
+      desc:"First Nations bewohnen das Land seit 15.000 Jahren. Frankreich kolonisiert ab 1534 den Osten. Pelzhandel dominiert die Wirtschaft. Britisch-Französische Rivalität.",
+      ruler:"Französischer Gouverneur",religion:"Katholisch / Indigen",pop:"~70.000 Siedler",lang:"Französisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:2,einfluss:1,innovation:1}},
+    {from:1763,to:1867,name:"Britisch-Nordamerika",cap:[45.42,-75.69],capName:"Ottawa",
+      desc:"Nach britischem Sieg im Siebenjährigen Krieg. Loyalisten fliehen aus den USA. Zwei Kanadas: Ober- (englisch) und Unter- (französisch). Konföderation 1867.",
+      ruler:"Britischer Gouverneur",religion:"Anglikanisch / Katholisch",pop:"~3 Mio.",lang:"Englisch / Französisch",
+      ratings:{wirtschaft:2,militaer:2,kultur:2,einfluss:1,innovation:2}},
+    {from:1867,to:2025,name:"Kanada (Dominion → Modern)",cap:[45.42,-75.69],capName:"Ottawa",
+      desc:"Dominion 1867. Transkontinentale Eisenbahn 1885. Kämpft in beiden Weltkriegen. Multikulturelle Einwanderungspolitik. Heute: G7-Mitglied, zweitgrößtes Land der Welt.",
+      ruler:"Premierminister",religion:"Christlich (divers)",pop:"~40 Mio.",lang:"Englisch / Französisch",
+      ratings:{wirtschaft:4,militaer:3,kultur:4,einfluss:3,innovation:4}}
+  ]},
 ];
 
+// ======= EVENTS =======
 const EVENTS = [
   {year:1492,name:"Kolumbus entdeckt Amerika",lat:23.13,lng:-82.36,desc:"Beginn des Kolonialzeitalters."},
-  {year:1517,name:"Reformation",lat:51.86,lng:12.65,desc:"Martin Luther veröffentlicht 95 Thesen. Spaltung der westlichen Christenheit."},
-  {year:1588,name:"Spanische Armada besiegt",lat:50.0,lng:-1.0,desc:"England siegt. Wende der Seemacht."},
-  {year:1683,name:"Belagerung Wiens",lat:48.21,lng:16.37,desc:"Osmanen werden geschlagen. Beginn ihres Niedergangs."},
-  {year:1707,name:"Vereinigung England-Schottland",lat:51.5,lng:-0.13,desc:"Großbritannien entsteht."},
-  {year:1776,name:"Amerikanische Unabhängigkeit",lat:39.95,lng:-75.17,desc:"13 Kolonien erklären Unabhängigkeit in Philadelphia."},
-  {year:1789,name:"Französische Revolution",lat:48.86,lng:2.35,desc:"Sturm auf die Bastille. Beginn der modernen Demokratie."},
-  {year:1804,name:"Napoleon krönt sich",lat:48.85,lng:2.34,desc:"Napoleon wird Kaiser der Franzosen."},
-  {year:1815,name:"Schlacht bei Waterloo",lat:50.68,lng:4.4,desc:"Napoleon endgültig besiegt."},
-  {year:1861,name:"Italienische Einigung",lat:41.9,lng:12.5,desc:"Königreich Italien gegründet."},
-  {year:1865,name:"Ende US-Bürgerkrieg",lat:38.91,lng:-77.04,desc:"Sklaverei abgeschafft. ~620.000 Tote."},
-  {year:1871,name:"Deutsche Reichsgründung",lat:48.81,lng:2.13,desc:"Wilhelm I. zum Kaiser proklamiert."},
-  {year:1914,name:"1. Weltkrieg",lat:43.86,lng:18.41,desc:"Attentat von Sarajevo. ~17 Mio. Tote."},
-  {year:1917,name:"Oktoberrevolution",lat:59.94,lng:30.31,desc:"Bolschewiken stürzen Zarenreich."},
-  {year:1939,name:"2. Weltkrieg",lat:52.23,lng:21.01,desc:"Deutschland überfällt Polen. ~70-85 Mio. Tote."},
-  {year:1945,name:"Atombombe auf Hiroshima",lat:34.39,lng:132.45,desc:"Erste Atomwaffe im Krieg eingesetzt."},
-  {year:1947,name:"Indien unabhängig",lat:28.61,lng:77.21,desc:"Britisch-Indien wird unabhängig. Teilung."},
-  {year:1949,name:"Volksrepublik China",lat:39.91,lng:116.4,desc:"Mao proklamiert VR China."},
-  {year:1989,name:"Mauerfall",lat:52.52,lng:13.4,desc:"Berliner Mauer fällt."},
-  {year:1991,name:"Sowjetunion zerfällt",lat:55.75,lng:37.62,desc:"UdSSR zerfällt in 15 Staaten."},
-  {year:1993,name:"EU gegründet",lat:50.85,lng:4.35,desc:"Maastrichter Vertrag. Aus EWG wird EU."},
+  {year:1517,name:"Reformation (Luther)",lat:51.86,lng:12.65,desc:"95 Thesen: Spaltung der westl. Christenheit."},
+  {year:1521,name:"Fall von Tenochtitlán",lat:19.43,lng:-99.13,desc:"Cortés zerstört die Aztekenhauptstadt."},
+  {year:1543,name:"Kopernikus: Heliozentrismus",lat:54.35,lng:18.65,desc:"Erde dreht sich um die Sonne!"},
+  {year:1588,name:"Spanische Armada besiegt",lat:50.0,lng:-1.0,desc:"England wird Seemacht."},
+  {year:1618,name:"30-jähriger Krieg",lat:50.09,lng:14.42,desc:"Verheerender Religionskrieg in Europa."},
+  {year:1648,name:"Westfälischer Frieden",lat:52.0,lng:7.63,desc:"Ende des 30-jährigen Kriegs. Souveränität."},
+  {year:1683,name:"Belagerung Wiens",lat:48.21,lng:16.37,desc:"Osmanen scheitern. Wendepunkt."},
+  {year:1707,name:"Großbritannien entsteht",lat:51.5,lng:-0.13,desc:"England + Schottland = UK."},
+  {year:1776,name:"US-Unabhängigkeit",lat:39.95,lng:-75.17,desc:"'All men are created equal.'"},
+  {year:1789,name:"Französische Revolution",lat:48.86,lng:2.35,desc:"Sturm auf die Bastille."},
+  {year:1804,name:"Napoleon wird Kaiser",lat:48.85,lng:2.34,desc:"Krönt sich in Notre-Dame."},
+  {year:1815,name:"Waterloo",lat:50.68,lng:4.4,desc:"Napoleons endgültige Niederlage."},
+  {year:1848,name:"Revolutionsjahr",lat:48.21,lng:16.37,desc:"Liberale Revolutionen in ganz Europa."},
+  {year:1861,name:"Italiens Einigung",lat:41.9,lng:12.5,desc:"Risorgimento vollendet."},
+  {year:1865,name:"Ende US-Bürgerkrieg",lat:38.91,lng:-77.04,desc:"Sklaverei abgeschafft."},
+  {year:1869,name:"Suezkanal eröffnet",lat:30.59,lng:32.27,desc:"Mittelmeer-Rotes Meer verbunden."},
+  {year:1871,name:"Deutsches Reich",lat:48.81,lng:2.13,desc:"Wilhelm I. zum Kaiser proklamiert."},
+  {year:1905,name:"Japan besiegt Russland",lat:39.0,lng:125.0,desc:"Erste asiatische Großmacht."},
+  {year:1914,name:"1. Weltkrieg",lat:43.86,lng:18.41,desc:"Schüsse von Sarajevo. 17 Mio. Tote."},
+  {year:1917,name:"Russische Revolution",lat:59.94,lng:30.31,desc:"Bolschewiken stürzen den Zaren."},
+  {year:1929,name:"Weltwirtschaftskrise",lat:40.71,lng:-74.01,desc:"Wall-Street-Crash. Globale Depression."},
+  {year:1939,name:"2. Weltkrieg",lat:52.23,lng:21.01,desc:"Deutschland überfällt Polen."},
+  {year:1945,name:"Hiroshima",lat:34.39,lng:132.45,desc:"Erste Atombombe. Japan kapituliert."},
+  {year:1947,name:"Indien unabhängig",lat:28.61,lng:77.21,desc:"Teilung in Indien und Pakistan."},
+  {year:1949,name:"VR China gegründet",lat:39.91,lng:116.4,desc:"Mao auf dem Tian'anmen-Platz."},
+  {year:1961,name:"Mauerbau Berlin",lat:52.52,lng:13.4,desc:"Deutschland geteilt. Kalter Krieg."},
+  {year:1969,name:"Mondlandung",lat:28.57,lng:-80.65,desc:"'Ein kleiner Schritt für den Menschen...'"},
+  {year:1989,name:"Mauerfall",lat:52.52,lng:13.4,desc:"Die Mauer fällt. Kalter Krieg endet."},
+  {year:1991,name:"UdSSR zerfällt",lat:55.75,lng:37.62,desc:"15 Nachfolgestaaten."},
+  {year:1994,name:"Ende der Apartheid",lat:-25.75,lng:28.19,desc:"Mandela wird Präsident."},
+  {year:2001,name:"9/11",lat:40.71,lng:-74.01,desc:"Terroranschläge. 'Krieg gegen Terror'."},
+  {year:2020,name:"COVID-19",lat:30.59,lng:114.31,desc:"Globale Pandemie."},
 ];
 
-const map = L.map('map', {center:[25,15], zoom:2, minZoom:2, maxZoom:6, zoomControl:true});
-
-L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{y}/{x}.png', {
+// ======= MAP SETUP =======
+const map = L.map('map',{center:[25,15],zoom:2,minZoom:2,maxZoom:6,zoomControl:true});
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{y}/{x}.png',{
   attribution:'© CartoDB',subdomains:'abcd',opacity:0.3
 }).addTo(map);
 
-let continentLayer = L.layerGroup().addTo(map);
+let bgLayer = L.layerGroup().addTo(map);
 let empireLayer = L.layerGroup().addTo(map);
 let labelLayer = L.layerGroup().addTo(map);
 let capitalLayer = L.layerGroup().addTo(map);
 let eventLayer = L.layerGroup().addTo(map);
 
+// Load country outlines
 fetch('https://raw.githubusercontent.com/nvkelso/natural-earth-vector/master/geojson/ne_110m_admin_0_countries.geojson')
-  .then(r=>r.json())
-  .then(geo=>{
-    L.geoJSON(geo,{style:{color:'#1a1208',weight:0.8,fillColor:'#f0e2c0',fillOpacity:0.9},interactive:false}).addTo(continentLayer);
+  .then(r=>r.json()).then(geo=>{
+    L.geoJSON(geo,{style:{color:'#3a2a15',weight:0.6,fillColor:'#ece0c8',fillOpacity:1},interactive:false}).addTo(bgLayer);
     renderYear(currentYear);
-  })
-  .catch(err=>console.warn('Geo-Daten nicht geladen'));
+  }).catch(()=>{});
 
-const yearSlider = document.getElementById('year-slider');
-const yearDisplay = document.getElementById('year-display');
-const playBtn = document.getElementById('play-btn');
-const legendItems = document.getElementById('legend-items');
-const timelineEvents = document.getElementById('timeline-events');
-const infoPanel = document.getElementById('info-panel');
-const searchInput = document.getElementById('search-input');
-const searchResults = document.getElementById('search-results');
+const slider=document.getElementById('yr-slider');
+const yrDisp=document.getElementById('yr-display');
+const playBtn=document.getElementById('play-btn');
+const tlEvents=document.getElementById('tl-events');
+const infoPanel=document.getElementById('info');
+const searchInput=document.getElementById('search-input');
+const searchResults=document.getElementById('search-results');
 
-let currentYear = 2025;
-let playing = false;
-let playInterval = null;
+let currentYear=2025, playing=false, playInt=null;
 
-function showEmpireInfo(emp) {
-  document.getElementById('info-name').textContent = emp.name;
-  document.getElementById('info-period').textContent = `${emp.from}–${emp.to >= 2025 ? 'heute' : emp.to}`;
-  document.getElementById('info-desc').textContent = emp.desc;
-  let meta = '';
-  if(emp.capName) meta+=`<div class="meta-row"><span class="meta-label">Hauptstadt</span>${emp.capName}</div>`;
-  if(emp.ruler) meta+=`<div class="meta-row"><span class="meta-label">Herrscher</span>${emp.ruler}</div>`;
-  if(emp.religion) meta+=`<div class="meta-row"><span class="meta-label">Religion</span>${emp.religion}</div>`;
-  if(emp.pop) meta+=`<div class="meta-row"><span class="meta-label">Bevölkerung</span>${emp.pop}</div>`;
-  if(emp.lang) meta+=`<div class="meta-row"><span class="meta-label">Sprache</span>${emp.lang}</div>`;
-  document.getElementById('info-meta').innerHTML = meta;
-  infoPanel.style.display = 'block';
+function showInfo(era){
+  document.getElementById('info-name').textContent=era.name;
+  document.getElementById('info-period').textContent=`${era.from}–${era.to>=2025?'heute':era.to}`;
+  document.getElementById('info-desc').textContent=era.desc;
+  let meta='';
+  if(era.capName) meta+=`<div class="meta-row"><span class="meta-label">Hauptstadt</span>${era.capName}</div>`;
+  if(era.ruler) meta+=`<div class="meta-row"><span class="meta-label">Herrscher</span>${era.ruler}</div>`;
+  if(era.religion) meta+=`<div class="meta-row"><span class="meta-label">Religion</span>${era.religion}</div>`;
+  if(era.pop) meta+=`<div class="meta-row"><span class="meta-label">Bevölkerung</span>${era.pop}</div>`;
+  if(era.lang) meta+=`<div class="meta-row"><span class="meta-label">Sprache</span>${era.lang}</div>`;
+  document.getElementById('info-meta').innerHTML=meta;
+  let rat='';
+  if(era.ratings){
+    const labels={wirtschaft:'🏭 Wirtschaft',militaer:'⚔️ Militär',kultur:'📚 Kultur',einfluss:'🌍 Einfluss',innovation:'💡 Innovation'};
+    for(let k in labels){
+      rat+=`<div class="rating-row"><span class="rating-label">${labels[k]}</span>${starsHTML(era.ratings[k])}</div>`;
+    }
+  }
+  document.getElementById('info-ratings').innerHTML=rat;
+  infoPanel.style.display='block';
 }
 
-function showEventInfo(ev) {
-  document.getElementById('info-name').textContent = ev.name;
-  document.getElementById('info-period').textContent = `Jahr ${ev.year}`;
-  document.getElementById('info-desc').textContent = ev.desc;
-  document.getElementById('info-meta').innerHTML = '';
-  infoPanel.style.display = 'block';
+function showEventInfo(ev){
+  document.getElementById('info-name').textContent=ev.name;
+  document.getElementById('info-period').textContent=`Jahr ${ev.year}`;
+  document.getElementById('info-desc').textContent=ev.desc;
+  document.getElementById('info-meta').innerHTML='';
+  document.getElementById('info-ratings').innerHTML='';
+  infoPanel.style.display='block';
 }
 
-function renderYear(year) {
-  currentYear = year;
-  yearDisplay.textContent = year;
-  yearSlider.value = year;
+function renderYear(year){
+  currentYear=year;
+  yrDisp.textContent=year;
+  slider.value=year;
   empireLayer.clearLayers();
   labelLayer.clearLayers();
   capitalLayer.clearLayers();
   eventLayer.clearLayers();
 
-  const active = EMPIRES.filter(e=>year>=e.from && year<=e.to);
+  COUNTRIES.forEach(c=>{
+    const era=getEra(c,year);
+    if(!era) return;
+    const poly=L.polygon(c.poly,{color:'#1a1208',weight:1.2,fillColor:era.ratings?
+      (era.ratings.einfluss>=4?'#c0392b':era.ratings.wirtschaft>=4?'#2980b9':'#8a7050'):'#8a7050',
+      fillOpacity:0.45}).addTo(empireLayer);
+    poly.on('click',()=>showInfo(era));
+    poly.bindTooltip(era.name,{direction:'center',className:'empire-tooltip'});
 
-  active.forEach(e=>{
-    const poly = L.polygon(e.poly,{color:'#1a1208',weight:0.8,fillColor:e.color,fillOpacity:0.55}).addTo(empireLayer);
-    poly.on('click',()=>showEmpireInfo(e));
-    poly.bindTooltip(e.name);
-  });
-
-  active.forEach(e=>{
+    // Label
     let cx=0,cy=0;
-    e.poly.forEach(p=>{cx+=p[0];cy+=p[1];});
-    cx/=e.poly.length;cy/=e.poly.length;
-    const label=L.divIcon({className:'',html:`<div class="empire-label" style="font-size:${e.poly.length>8?12:10}px;">${e.name}</div>`,iconSize:[120,16],iconAnchor:[60,8]});
-    L.marker([cx,cy],{icon:label,interactive:false}).addTo(labelLayer);
-  });
+    c.poly.forEach(p=>{cx+=p[0];cy+=p[1]});
+    cx/=c.poly.length;cy/=c.poly.length;
+    const sz=c.poly.length>15?11:c.poly.length>10?10:9;
+    const lbl=L.divIcon({className:'',html:`<div class="empire-label" style="font-size:${sz}px">${era.name}</div>`,iconSize:[130,18],iconAnchor:[65,9]});
+    L.marker([cx,cy],{icon:lbl,interactive:false}).addTo(labelLayer);
 
-  active.forEach(e=>{
-    if(e.cap){
-      const m=L.marker(e.cap,{icon:L.divIcon({className:'capital-marker',iconSize:[8,8]})}).addTo(capitalLayer);
-      m.bindTooltip(`★ ${e.capName}`);
-      m.on('click',()=>showEmpireInfo(e));
+    // Capital
+    if(era.cap){
+      const m=L.marker(era.cap,{icon:L.divIcon({className:'capital-marker',iconSize:[7,7]})}).addTo(capitalLayer);
+      m.bindTooltip(`★ ${era.capName}`,{direction:'top'});
+      m.on('click',()=>showInfo(era));
     }
   });
 
-  const recentEvents=EVENTS.filter(ev=>Math.abs(ev.year-year)<=5);
-  recentEvents.forEach(ev=>{
+  // Events
+  EVENTS.filter(ev=>Math.abs(ev.year-year)<=5).forEach(ev=>{
     const m=L.marker([ev.lat,ev.lng],{icon:L.divIcon({className:'event-marker',iconSize:[10,10]})}).addTo(eventLayer);
-    m.bindTooltip(`⚡ ${ev.year}: ${ev.name}`);
+    m.bindTooltip(`⚡ ${ev.year}: ${ev.name}`,{direction:'top'});
     m.on('click',()=>showEventInfo(ev));
   });
 
-  const seen=new Set();
-  legendItems.innerHTML=active.filter(e=>{if(seen.has(e.name))return false;seen.add(e.name);return true;}).map(e=>`<div class="legend-item" data-id="${e.id}"><div class="legend-color" style="background:${e.color}"></div><div class="legend-label">${e.name}</div></div>`).join('');
-
-  legendItems.querySelectorAll('.legend-item').forEach(item=>{
-    item.addEventListener('click',()=>{
-      const emp=active.find(x=>x.id===item.getAttribute('data-id'));
-      if(emp){showEmpireInfo(emp);let cx=0,cy=0;emp.poly.forEach(p=>{cx+=p[0];cy+=p[1];});cx/=emp.poly.length;cy/=emp.poly.length;map.setView([cx,cy],4);}
-    });
-  });
-
-  const upcoming=EVENTS.filter(ev=>ev.year>=year && ev.year<=year+25).slice(0,5);
-  timelineEvents.innerHTML=upcoming.map(ev=>`<span class="tl-event" data-year="${ev.year}">${ev.year}: ${ev.name}</span>`).join('');
-  timelineEvents.querySelectorAll('.tl-event').forEach(el=>{
-    el.addEventListener('click',()=>{const y=parseInt(el.getAttribute('data-year'));yearSlider.value=y;renderYear(y);const ev=EVENTS.find(e=>e.year===y);if(ev){map.setView([ev.lat,ev.lng],4);showEventInfo(ev);}});
+  // Timeline events
+  const upcoming=EVENTS.filter(ev=>ev.year>=year&&ev.year<=year+25).slice(0,5);
+  tlEvents.innerHTML=upcoming.map(ev=>`<span class="tl-ev" data-year="${ev.year}">${ev.year}: ${ev.name}</span>`).join('');
+  tlEvents.querySelectorAll('.tl-ev').forEach(el=>{
+    el.addEventListener('click',()=>{const y=parseInt(el.dataset.year);renderYear(y);const ev=EVENTS.find(e=>e.year===y);if(ev){map.setView([ev.lat,ev.lng],4);showEventInfo(ev);}});
   });
 }
 
-yearSlider.addEventListener('input',()=>renderYear(parseInt(yearSlider.value)));
-
+slider.addEventListener('input',()=>renderYear(parseInt(slider.value)));
 playBtn.addEventListener('click',()=>{
-  if(playing){clearInterval(playInterval);playBtn.textContent='▶ Auto';playing=false;}
-  else{playing=true;playBtn.textContent='⏸ Stop';playInterval=setInterval(()=>{let y=parseInt(yearSlider.value);y+=5;if(y>2025)y=1500;renderYear(y);},800);}
+  if(playing){clearInterval(playInt);playBtn.textContent='▶';playing=false;}
+  else{playing=true;playBtn.textContent='⏸';playInt=setInterval(()=>{let y=parseInt(slider.value)+5;if(y>2025)y=1500;renderYear(y);},800);}
 });
 
-function doSearch(q) {
+// Search
+function doSearch(q){
   q=q.toLowerCase().trim();
   if(q.length<2){searchResults.style.display='none';return;}
-  const empResults=EMPIRES.filter(e=>e.name.toLowerCase().includes(q)||(e.capName&&e.capName.toLowerCase().includes(q))||(e.ruler&&e.ruler.toLowerCase().includes(q))).slice(0,6);
-  const evResults=EVENTS.filter(e=>e.name.toLowerCase().includes(q)||e.desc.toLowerCase().includes(q)).slice(0,4);
   let html='';
-  empResults.forEach(e=>{html+=`<div class="search-item" data-type="empire" data-id="${e.id}">${e.name}<span class="year">${e.from}–${e.to>=2025?'heute':e.to}</span></div>`;});
-  evResults.forEach(e=>{html+=`<div class="search-item" data-type="event" data-year="${e.year}">${e.name}<span class="year">${e.year}</span></div>`;});
+  COUNTRIES.forEach(c=>{c.eras.forEach(e=>{
+    if(e.name.toLowerCase().includes(q)||(e.capName&&e.capName.toLowerCase().includes(q))||(e.ruler&&e.ruler.toLowerCase().includes(q)))
+      html+=`<div class="search-item" data-cid="${c.id}" data-from="${e.from}" data-to="${e.to}">${e.name}<span class="yr">${e.from}–${e.to>=2025?'heute':e.to}</span></div>`;
+  });});
+  EVENTS.forEach(e=>{
+    if(e.name.toLowerCase().includes(q))
+      html+=`<div class="search-item" data-type="ev" data-year="${e.year}">${e.name}<span class="yr">${e.year}</span></div>`;
+  });
   if(!html) html='<div class="search-item">Keine Ergebnisse</div>';
   searchResults.innerHTML=html;
   searchResults.style.display='block';
   searchResults.querySelectorAll('.search-item').forEach(item=>{
     item.addEventListener('click',()=>{
-      const type=item.getAttribute('data-type');
-      if(type==='empire'){const emp=EMPIRES.find(x=>x.id===item.getAttribute('data-id'));if(emp){const midYear=Math.floor((emp.from+Math.min(emp.to,2025))/2);yearSlider.value=midYear;renderYear(midYear);let cx=0,cy=0;emp.poly.forEach(p=>{cx+=p[0];cy+=p[1];});cx/=emp.poly.length;cy/=emp.poly.length;map.setView([cx,cy],4);showEmpireInfo(emp);}}
-      else if(type==='event'){const y=parseInt(item.getAttribute('data-year'));const ev=EVENTS.find(e=>e.year===y);if(ev){yearSlider.value=y;renderYear(y);map.setView([ev.lat,ev.lng],5);showEventInfo(ev);}}
-      searchResults.style.display='none';
-      searchInput.value='';
+      if(item.dataset.type==='ev'){
+        const y=parseInt(item.dataset.year);renderYear(y);
+        const ev=EVENTS.find(e=>e.year===y);if(ev){map.setView([ev.lat,ev.lng],5);showEventInfo(ev);}
+      } else {
+        const c=COUNTRIES.find(x=>x.id===item.dataset.cid);
+        const midY=Math.floor((parseInt(item.dataset.from)+Math.min(parseInt(item.dataset.to),2025))/2);
+        renderYear(midY);
+        if(c){let cx=0,cy=0;c.poly.forEach(p=>{cx+=p[0];cy+=p[1]});cx/=c.poly.length;cy/=c.poly.length;map.setView([cx,cy],4);}
+        const era=c?getEra(c,midY):null;if(era)showInfo(era);
+      }
+      searchResults.style.display='none';searchInput.value='';
     });
   });
 }
-
 searchInput.addEventListener('input',()=>doSearch(searchInput.value));
-searchInput.addEventListener('focus',()=>{if(searchInput.value)doSearch(searchInput.value);});
 document.addEventListener('click',e=>{if(!e.target.closest('#search-box'))searchResults.style.display='none';});
-
 document.getElementById('info-close').addEventListener('click',()=>infoPanel.style.display='none');
 
 renderYear(2025);
-
 })();
 </script>
-
 </body>
 </html>
